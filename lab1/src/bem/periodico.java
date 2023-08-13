@@ -9,9 +9,11 @@ public class periodico {
 	private String editora;
 	private String assunto;
 	private String data;
+	private boolean disponivel;
+	private int unidades;
 	
 	// Construtor classe
-	public periodico(String nome, String editora, String assunto, String data) {
+	public periodico(String nome, String editora, String assunto, String data, boolean disponivel, int unidades) {
 		this.nome = nome;
 		this.editora = editora;
 		this.assunto = assunto;
@@ -21,6 +23,8 @@ public class periodico {
 		int intid = (int)rand;
 		String id = Integer.toString(intid);
 		this.id = id;//Idealmente há de se haver um sistema de geração de ids
+		this.disponivel = disponivel;
+		this.unidades = unidades;
 	}
 	
 	
@@ -53,7 +57,18 @@ public class periodico {
 	public String getData() {
 		return data;
 	}	
-
+	public boolean getDisponibilidade() {
+		return disponivel;
+	}
+	public void setDisponibilidade(boolean disponivel) {
+		this.disponivel = disponivel;
+	}
+	public int getUnidade() {
+		return unidades;
+	}
+	public void setUnidade(int unidades) {
+		this.unidades = unidades;
+	}
 
 
 }

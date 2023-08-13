@@ -8,9 +8,11 @@ public class livro {
 	private String editora;
 	private String assunto;
 	private String autor;
+	private boolean disponivel;
+	private int unidades;
 	
 	// Construtor classe
-	public livro(String nome, String editora, String assunto, String autor) {
+	public livro(String nome, String editora, String assunto, String autor, boolean disponivel, int unidades) {
 		this.nome = nome;
 		this.editora = editora;
 		this.assunto = assunto;
@@ -20,6 +22,8 @@ public class livro {
 		int intid = (int)rand;
 		String id = Integer.toString(intid);
 		this.id = id;//Idealmente há de se haver um sistema de geração de ids
+		this.disponivel = disponivel;
+		this.unidades = unidades;
 	}
 	
 	
@@ -52,5 +56,17 @@ public class livro {
 	public String getAutor() {
 		return autor;
 	}	
+	public boolean getDisponibilidade() {
+		return disponivel;
+	}
+	public void setDisponibilidade(boolean disponivel) {
+		this.disponivel = disponivel;
+	}
+	public int getUnidade() {
+		return unidades;
+	}
+	public void setUnidade(int unidades) {
+		this.unidades = unidades;
+	}
 
 }
