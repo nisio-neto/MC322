@@ -1,4 +1,5 @@
 package RH;
+import java.lang.Math;
 
 public class usuario {
 	// Atributos da classe
