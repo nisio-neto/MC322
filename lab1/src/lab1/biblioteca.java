@@ -3,6 +3,7 @@ import bem.livro;
 import bem.periodico;
 import RH.funcionarios;
 import RH.usuario;
+import bem.Emprestimo;
 
 public class biblioteca {
 	public static void main(String[] args) {
@@ -10,6 +11,7 @@ public class biblioteca {
 		usuario Nisio = new usuario("Nisio José","(31)91234321","41932966780","13083-700");
 		livro Java = new livro("The Java Programming Language","Prentice Hall","Ensino","Ken Arnold, James Gosling & David Holmes",true,2);
 		periodico Folha = new periodico("Folha de São Paulo","Folha da Manhã S.A.","Jornal","13/08/2023",true,10);
+		Emprestimo pedido01 = new Emprestimo(Nisio.getNome(),Java.getNome());
 	}
 	
 
