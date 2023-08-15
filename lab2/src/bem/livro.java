@@ -3,13 +3,13 @@ import java.lang.Math;
 
 public class livro {
 	// Atributos da classe
-	private String id; // Identificação interna do livro
-	private String nome;
-	private String editora;
-	private String assunto;
-	private String autor;
-	private boolean disponivel;
-	private int unidades;
+	public String id; // Identificação interna do livro
+	private String nome; // Nome do livro
+	private String editora; // Editora do livro
+	private String assunto; // Assunto do livro/seção da biblioteca
+	private String autor; // Autor(es) do livro
+	private boolean disponivel; // Indica se o livro está disponível para empréstimo
+	private int unidades; // Indica unidades do livro disponiveis para emprestimo
 	
 	// Construtor classe
 	public livro(String nome, String editora, String assunto, String autor, boolean disponivel, int unidades) {

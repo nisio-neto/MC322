@@ -1,4 +1,4 @@
-package lab1;
+package main;
 import bem.livro;
 import bem.periodico;
 import RH.funcionarios;

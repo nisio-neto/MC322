@@ -3,11 +3,11 @@ import java.lang.Math;
 
 public class funcionarios {
 	// Atributos da classe
-	private String id; // Identificação interna do funcionario
-	private String nome;
-	private String telefone;
-	private String CPF;
-	private String CEP;
+	public String id; // Identificação interna do funcionario
+	private String nome; // Nome do funcionario
+	private String telefone; // Telefone do funcionario
+	private String CPF; // CPF do funcionario
+	private String CEP; // CEP da residencia do funcionario
 	// Construtor da Classe
 	public funcionarios(String nome, String telefone, String CPF, String CEP) {
 		this.nome = nome;

@@ -4,13 +4,13 @@ import java.lang.Math;
 public class periodico {
 
 	// Atributos da classe
-	private String id; // Identificação interna do livro
-	private String nome;
-	private String editora;
-	private String assunto;
-	private String data;
-	private boolean disponivel;
-	private int unidades;
+	public String id; // Identificação interna do periodico
+	private String nome; // Nome do periodico
+	private String editora; // Editora do periodico
+	private String assunto; // Assunto do periodico/seção da biblioteca
+	private String data; // Autor(es) do periodico
+	private boolean disponivel; // Indica se o periodico está disponível para empréstimo
+	private int unidades; // Indica unidades do periodico disponiveis para emprestimo
 	
 	// Construtor classe
 	public periodico(String nome, String editora, String assunto, String data, boolean disponivel, int unidades) {

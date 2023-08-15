@@ -3,13 +3,13 @@ import java.lang.Math;
 
 public class usuario {
 	// Atributos da classe
-	private String id; // Identificação interna do usuario
-	private String nome;
-	private String telefone;
-	private String CPF;
-	private String CEP;
-	private boolean Multa;
-	private int DiasMulta;
+	public String id; // Identificação interna do usuario
+	private String nome; // Nome do usuario
+	private String telefone; // Telefone do usuario
+	private String CPF; // CPF do usuario
+	private String CEP; // CEP da residencia do usuario
+	private boolean Multa; // Indica se o usuario recebeu multa
+	private int DiasMulta; // indica dias de multa do usuario
 	
 	public usuario(String nome, String telefone, String CPF, String CEP) {
 		this.nome = nome;
