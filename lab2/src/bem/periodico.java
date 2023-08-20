@@ -27,6 +27,34 @@ public class periodico {
 		this.unidades = unidades;
 	}
 	
+	// Metodos da classe
+	
+	public boolean retiraPeriodico(int copias) {
+		int exemplares = this.getUnidade();
+		boolean disponibilidade = this.getDisponibilidade();
+		if(disponibilidade == false) {
+			return false;
+		}
+		exemplares = exemplares - copias;
+		if(exemplares < 0) {
+			return false;
+		}
+		else {
+			this.setUnidade(exemplares);
+			if(exemplares == 0) {
+				this.setDisponibilidade(false);
+			}
+			return true;
+		}
+	}
+	public void adicionaCopia(int copias) {
+		int exemplares = this.getUnidade();
+		exemplares = exemplares + copias;
+		this.setUnidade(exemplares);
+		if(exemplares > 0) {
+			this.setDisponibilidade(true);
+		}
+	}
 	
 	
 	// Getters e Setters

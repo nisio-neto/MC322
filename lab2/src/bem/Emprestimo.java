@@ -22,6 +22,7 @@ public class Emprestimo {
         this.dataVencimento = new Data(dataVencimento);
         GeradorID gerador = new GeradorID(); // gerar ID do emprestimo
         this.id = gerador.gerarId();
+        System.out.println(id);
         this.devolvido = false;
        
             
@@ -32,8 +33,8 @@ public class Emprestimo {
     		   double rand = Math.random();
     		   rand = rand*1000000;
     		   int intid = (int)rand;
-    		   return String id = Integer.toString(intid);
-    		   
+    		   String id = Integer.toString(intid);
+    		   return id;
     	   }
         
     }
@@ -64,7 +65,7 @@ public class Emprestimo {
     }
     
     // Getter para a data de empréstimo
-    public Data getDataEnprestimo() {
+    public Data getDataEmprestimo() {
     	return dataEmprestimo;
     }
     
@@ -75,7 +76,7 @@ public class Emprestimo {
     
     // Setter para a data de vencimento
     public void setDataVencimento(Data datavencimento) {
-    	this.dataVencimento = dataVencimento;
+    	this.dataVencimento = datavencimento;
     }
     
     // getter para a flag "devolvido"
