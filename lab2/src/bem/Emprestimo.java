@@ -29,9 +29,54 @@ public class Emprestimo {
         
         
     }
-
-    void marcarComoDevolvido() {
-        this.devolvido = true;
+       // Getter para ID
+    public String getId() {
+    	return id;
+    }
+    
+     // Getter para livro
+    public String getLivro() {
+    	return livro;
+    }
+    
+    // Setter para o livro
+    public void setLivro(String livro) {
+    	this.livro = livro;
+    }
+    
+    // Getter para o usuário
+    public String getUsuario() {
+    	return usuario;
+    }
+    
+    // Setter para usuário
+    public void setUsuario(String usuario) {
+    	this.usuario =usuario;
+    }
+    
+    // Getter para a data de empréstimo
+    public Data getDataEnprestimo() {
+    	return dataEmprestimo;
+    }
+    
+    //Getter para a data de vencimento
+    public Data getDataVencimento() {
+    	return dataVencimento;
+    }
+    
+    // Setter para a data de vencimento
+    public void setDataVencimento(Data datavencimento) {
+    	this.dataVencimento = dataVencimento;
+    }
+    
+    // getter para a flag "devolvido"
+    public boolean getDevolvido() {
+    	return devolvido;
+    }
+   
+    // Setter para flag "devolvido"
+    public void setDevolvido(boolean devolvido) {
+    	this.devolvido = devolvido;
     }
 
     // Classe interna estática Data
