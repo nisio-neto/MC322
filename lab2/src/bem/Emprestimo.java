@@ -5,7 +5,7 @@ import java.lang.Math;
 
 public class Emprestimo {
     // Atributos da Classe
-	public String id; // Id interna do emprestimo
+	private String id; // Id interna do emprestimo
     private String livro; // Nome/id do livro
     private String usuario; // Nome/id do usuario
     private Data dataEmprestimo;  // Data de emprestimo
@@ -20,15 +20,24 @@ public class Emprestimo {
         int diasDeVencimento = 14; // Por exemplo, 14 dias de vencimento
         LocalDate dataVencimento = LocalDate.now().plusDays(diasDeVencimento); // Adicione os dias de vencimento
         this.dataVencimento = new Data(dataVencimento);
-        double rand = Math.random();
-		rand = rand*1000000;
-		int intid = (int)rand;
-		String id = Integer.toString(intid);
-		this.id = id;//Idealmente há de se haver um sistema de geração de ids, que aqui é improvisado
+        GeradorID gerador = new GeradorID(); // gerar ID do emprestimo
+        this.id = gerador.gerarId();
         this.devolvido = false;
-        
+       
+            
+    }
+    // Classe interna para gerar IDS de emprestimo
+       public class GeradorID{
+    	   public static String gerarId() {
+    		   double rand = Math.random();
+    		   rand = rand*1000000;
+    		   int intid = (int)rand;
+    		   return String id = Integer.toString(intid);
+    		   
+    	   }
         
     }
+       
        // Getter para ID
     public String getId() {
     	return id;
