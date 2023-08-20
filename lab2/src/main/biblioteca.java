@@ -12,7 +12,15 @@ public class biblioteca {
 		livro Java = new livro("The Java Programming Language","Prentice Hall","Ensino","Ken Arnold, James Gosling & David Holmes",true,2);
 		periodico Folha = new periodico("Folha de São Paulo","Folha da Manhã S.A.","Jornal","13/08/2023",true,10);
 		Emprestimo pedido01 = new Emprestimo(Nisio.getNome(),Java.getNome());
+		System.out.println("Empréstimo realizado para " + Nisio.getNome() + " do livro " + Java.getNome());
+        
+        // Simulando a devolução do livro
+        pedido01.marcarComoDevolvido();
+        
+        if (pedido01.getDevolvido()) {
+            System.out.println("O livro " + Java.getNome() + " foi devolvido.");
+        } else {
+            System.out.println("O livro " + Java.getNome() + " ainda não foi devolvido.");
+            }
 	}
-	
-
 }
