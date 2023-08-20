@@ -25,6 +25,23 @@ public class usuario {
 		this.DiasMulta = 0;
 	}
 	
+	// Metodos da classe
+	
+	public void aplicaMulta(boolean Multa, int DiasMulta) {
+		this.setMulta(Multa);
+		this.setDiasMulta(DiasMulta);
+	}
+	public void retiraMulta() {
+		this.setMulta(false);
+		this.setDiasMulta(0);
+	}
+	public void recadastraUsuario(String Nome, String Telefone, String CPF, String CEP) {
+		this.setNome(Nome);
+		this.setTelefone(Telefone);
+		this.setCEP(CEP);
+		this.setCPF(CPF);
+	}
+	
 	// Getters e Setters
 	public String getID() {
 		return id;
