@@ -21,7 +21,12 @@ public class funcionarios {
 		this.id = id;//Idealmente há de se haver um sistema de geração de ids
 	}
 	// Metodos da classe
-	
+	public void recadastraFuncionario(String Nome, String Telefone, String CPF, String CEP) {
+		this.setNome(Nome);
+		this.setTelefone(Telefone);
+		this.setCEP(CEP);
+		this.setCPF(CPF);
+	}
 	
 	// Getters e Setters
 	
