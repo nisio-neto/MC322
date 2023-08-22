@@ -1,7 +1,6 @@
 package bem;
 
-public class Livro {
-
+public class Ebook {
 	private String nome;
 	private String autor;
 	private String editora;
@@ -9,7 +8,7 @@ public class Livro {
 	private int ano;
 	private String edicao;
 	
-	public Livro(String nome, String autor, String editora, String genero, int ano, String edicao) {
+	public Ebook(String nome, String autor, String editora, String genero, int ano, String edicao) {
 		this.nome = nome;
 		this.autor = autor; 
 		this.editora = editora;

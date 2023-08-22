@@ -1,19 +1,39 @@
 package bem;
 import java.lang.Math;
+import bem.DVD;
+import bem.Livro;
+import bem.Ebook;
+import bem.CD;
 
-public class periodico {
+
+public class Multimidia {
 
 	// Atributos da classe
-	public String id; // Identificação interna do periodico
-	private String nome; // Nome do periodico
-	private String editora; // Editora do periodico
-	private String assunto; // Assunto do periodico/seção da biblioteca
-	private String data; // Autor(es) do periodico
-	private boolean disponivel; // Indica se o periodico está disponível para empréstimo
-	private int unidades; // Indica unidades do periodico disponiveis para emprestimo
+	public String id; // Identificação interna do item
+	private DVD[] dvds; // Nome do item
+	private Livro[] livros; // Editora do periodico
+	private Ebook[] ebooks; // Assunto do periodico/seção da biblioteca
+	private CD[] cds; // Autor(es) do periodico
+	private boolean disponivel[][]; // Indica se o periodico está disponível para empréstimo
+	private int unidades[][]; // Indica unidades do periodico disponiveis para emprestimo
 	
 	// Construtor classe
-	public periodico(String nome, String editora, String assunto, String data, boolean disponivel, int unidades) {
+	public Multimidia(String item, String campo1, String campo2, String campo3, String campo4, String campo5, String campo6, int unidades, boolean disponivel) {
+		if(item.equals("DVD")) {
+			
+		}
+		if(item.equals("CD")) {
+			
+		}
+		if(item.equals("Ebook")) {
+			
+		}
+		if(item.equals("Livro")) {
+			
+		}
+		else {
+			System.out.println("Esse item não é aceito em nossa biblioteca");
+		}
 		this.nome = nome;
 		this.editora = editora;
 		this.assunto = assunto;

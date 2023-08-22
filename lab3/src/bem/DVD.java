@@ -1,18 +1,18 @@
 package bem;
 
-public class Livro {
+public class DVD {
 
 	private String nome;
-	private String autor;
-	private String editora;
+	private String diretor;
+	private String estudio;
 	private String genero;
 	private int ano;
 	private String edicao;
 	
-	public Livro(String nome, String autor, String editora, String genero, int ano, String edicao) {
+	public DVD(String nome, String diretor, String estudio, String genero, int ano, String edicao) {
 		this.nome = nome;
-		this.autor = autor; 
-		this.editora = editora;
+		this.diretor = diretor; 
+		this.estudio = estudio;
 		this.genero = genero;
 		this.ano = ano;
 		this.edicao = edicao;
@@ -25,11 +25,11 @@ public class Livro {
 	protected String getNome() {
 		return nome;
 	}
-	protected void setEditora(String editora) {
-		this.editora = editora;
+	protected void setEstudio(String estudio) {
+		this.estudio = estudio;
 	}
-	protected String getEditora() {
-		return editora;
+	protected String getEstudio() {
+		return estudio;
 	}
 	protected void setGenero(String genero) {
 		this.genero = genero;
@@ -43,11 +43,11 @@ public class Livro {
 	protected int getAno() {
 		return ano;
 	}	
-	protected String getAutor() {
-		return autor;
+	protected String getDiretor() {
+		return diretor;
 	}
-	protected void setAutor(String autor) {
-		this.autor = autor;
+	protected void setDiretor(String diretor) {
+		this.diretor = diretor;
 	}
 	protected String getEdicao() {
 		return edicao;
@@ -55,4 +55,5 @@ public class Livro {
 	protected void setEdicao(String edicao) {
 		this.edicao = edicao;
 	}
+
 }
