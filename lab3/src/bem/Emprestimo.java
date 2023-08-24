@@ -1,8 +1,9 @@
 package bem;
 
 import bem.Data;
-import java.lang.Math;
+import bem.GeradorID;
 import java.time.LocalDate;
+
 
 public class Emprestimo {
     // Atributos da Classe
@@ -28,18 +29,7 @@ public class Emprestimo {
        
             
     }
-    // Classe interna para gerar IDS de emprestimo
-       public class GeradorID{
-    	   public static String gerarId() {
-    		   double rand = Math.random();
-    		   rand = rand*1000000;
-    		   int intid = (int)rand;
-    		   String id = Integer.toString(intid);
-    		   return id;
-    	   }
-        
-    }
-       
+
        // Getter para ID
     public String getId() {
     	return id;
