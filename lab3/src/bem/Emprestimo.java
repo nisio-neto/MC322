@@ -1,7 +1,8 @@
 package bem;
 
-import java.time.LocalDate;
+import bem.Data;
 import java.lang.Math;
+import java.time.LocalDate;
 
 public class Emprestimo {
     // Atributos da Classe
@@ -89,44 +90,5 @@ public class Emprestimo {
     	this.devolvido = devolvido;
     }
 
-    // Classe interna estática Data
-    public static class Data {
-        private int dia;
-        private int mes;
-        private int ano;
-
-        public Data(LocalDate data) {
-            this.dia = data.getDayOfMonth();
-            this.mes = data.getMonthValue();
-            this.ano = data.getYear();
-        }
-
-        public int getDia() {
-            return dia;
-        }
-
-        public int getMes() {
-            return mes;
-        }
-
-        public int getAno() {
-            return ano;
-        }
-
-        public void setDia(int dia) {
-            this.dia = dia;
-        }
-
-        public void setMes(int mes) {
-            this.mes = mes;
-        }
-
-        public void setAno(int ano) {
-            this.ano = ano;
-        }
-
-        public String toString() {
-            return dia + "/" + mes + "/" + ano;
-        }
-    }
+ 
 }
