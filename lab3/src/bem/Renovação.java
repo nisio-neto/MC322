@@ -1,11 +1,9 @@
 package bem;
 
-import bem.Data;
 import java.time.LocalDate;
+import bem.Data;
 
 public class Renovação {
-
-
 
 	//Atributo da classe
 	private String livro;
@@ -19,10 +17,10 @@ public class Renovação {
 	public Renovação(String livro, String usuario) {
 		this.livro = livro;
 		this.usuario = usuario;
-		this.dataRenovacao = new Data(LocalDate.now());
+		this.dataRenovacao = new Data();
 		int diasRenovacao = 7; // prazo de renovação de 7 dias
-		LocalDate dataRenovado = LocalDate.now().plusDays(diasRenovacao);
-		this.dataRenovado = new Data(dataRenovado);
+		this.dataRenovado = new Data();
+		this.dataRenovado.adicionarDias(diasRenovacao);
 		this.renovado = false; // inicialmente não foi renovado
 		GeradorID gerador = new GeradorID(); // gerar ID de renovação
         this.id = gerador.gerarId();
@@ -33,8 +31,7 @@ public class Renovação {
 	public void renovar() {
 		if(!renovado) {
 			int diasRenovacao = 7; //Prazo de renovação de 7 dias
-			LocalDate novaDataRenovado = LocalDate.now().plusDays(diasRenovacao);
-			this.dataRenovado = new Data(novaDataRenovado);
+			this.dataRenovado.adicionarDias(diasRenovacao);
 			this.renovado = true;
 		} else {
 			System.out.println("Este empréstimo já foi renovado anteriorimente.");
