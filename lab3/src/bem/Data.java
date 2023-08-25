@@ -10,12 +10,22 @@ public class Data {
 	private int ano; // ano
 
 	//Construtor da Classe
-	public Data(LocalDate data) {
-	this.dia = data.getDayOfMonth(); //gerar dia do mês
-	this.mes = data.getMonthValue(); // gerar mês do ano
-	this.ano = data.getYear(); // gerar ano
+	public Data() {
+	LocalDate dataAtual = LocalDate.now();
+	this.dia = dataAtual.getDayOfMonth(); //gerar dia do mês
+	this.mes = dataAtual.getMonthValue(); // gerar mês do ano
+	this.ano = dataAtual.getYear(); // gerar ano
 	}
 
+	//Adicionar dias a uma data
+	public void adicionarDias(int dias) {
+		LocalDate dataAtual = LocalDate.of(ano, mes, dia);
+		LocalDate dataNova = dataAtual.plusDays(dias);
+		this.dia = dataNova.getDayOfMonth();
+		this.mes = dataNova.getMonthValue();
+		this.ano = dataNova.getYear();
+	}
+	
 	//getter do dia
 	public int getDia() {
 		return dia;
