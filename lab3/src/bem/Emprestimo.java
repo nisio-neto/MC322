@@ -18,10 +18,11 @@ public class Emprestimo {
     public Emprestimo(String livro, String usuario) {
         this.livro = livro; 
         this.usuario = usuario;
-        this.dataEmprestimo = new Data(LocalDate.now());
+        this.dataEmprestimo = new Data();
         int diasDeVencimento = 14; // Por exemplo, 14 dias de vencimento
-        LocalDate dataVencimento = LocalDate.now().plusDays(diasDeVencimento); // Adicione os dias de vencimento
-        this.dataVencimento = new Data(dataVencimento);
+        Data dataAtual = new Data();
+        dataAtual.adicionarDias(diasDeVencimento); // Adicione os dias de vencimento
+        this.dataVencimento = dataAtual;
         GeradorID gerador = new GeradorID(); // gerar ID do emprestimo
         this.id = gerador.gerarId();
         System.out.println(id);
