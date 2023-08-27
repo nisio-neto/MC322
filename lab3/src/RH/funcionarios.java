@@ -1,62 +1,40 @@
 package RH;
-import java.lang.Math;
 
-public class funcionarios {
+public class funcionarios extends membro{
 	// Atributos da classe
-	public String id; // Identificação interna do funcionario
-	private String nome; // Nome do funcionario
-	private String telefone; // Telefone do funcionario
-	private String CPF; // CPF do funcionario
-	private String CEP; // CEP da residencia do funcionario
+	private String cargo;
+	private String acesso;
+	
 	// Construtor da Classe
-	public funcionarios(String nome, String telefone, String CPF, String CEP) {
-		this.nome = nome;
-		this.telefone = telefone;
-		this.CEP = CEP;
-		this.CPF = CPF;
-		double rand = Math.random();
-		rand = rand*1000;
-		int intid = (int)rand;
-		String id = Integer.toString(intid);
-		this.id = id;//Idealmente há de se haver um sistema de geração de ids
+	public funcionarios(String nome, String telefone, String CPF, String CEP, String email, String cargo, String acesso) {
+		super(nome,telefone,CPF,CEP,email);
+		this.cargo =  cargo;
+		this.acesso = acesso;
+		
 	}
 	// Metodos da classe
-	public void recadastraFuncionario(String Nome, String Telefone, String CPF, String CEP) {
+	public void recadastraFuncionario(String Nome, String Telefone, String CPF, String CEP, String email, String cargo, String acesso) {
 		this.setNome(Nome);
 		this.setTelefone(Telefone);
 		this.setCEP(CEP);
 		this.setCPF(CPF);
+		this.setEmail(email);
+		this.setAcesso(acesso);
+		this.setCargo(cargo);
 	}
 	
 	// Getters e Setters
-	
-	public String getID() {
-		return id;
+	public void setCargo(String cargo) {
+		this.cargo = cargo;
 	}
-	public void setNome(String nome) {
-		this.nome = nome;
+	public String getCargo() {
+		return cargo;
+	}	
+	public void setAcesso(String acesso) {
+		this.acesso = acesso;
 	}
-	public String getNome() {
-		return nome;
+	public String getAcesso() {
+		return acesso;
 	}
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
-	}
-	public String getTelefone() {
-		return telefone;
-	}
-	public void setCPF(String CPF) {
-		this.CPF = CPF;
-	}
-	public String getCPF() {
-		return CPF;
-	}
-	public void setCEP(String CEP) {
-		this.CEP = CEP;
-	}
-	public String getCEP() {
-		return CEP;
-	}
-	
 
 }

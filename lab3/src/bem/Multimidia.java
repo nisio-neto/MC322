@@ -33,6 +33,9 @@ public class Multimidia {
 	public void adicionaDVD(String nome, String diretor, String estudio, String genero, int ano, String edicao) {
 		DVD dvd = new DVD(nome, diretor, estudio, genero, ano, edicao);
 		dvds[numItem[0]] = dvd;
+		this.unidades[0][numItem[0]] = unidades[0][numItem[0]];  
+        this.disponivel[0][numItem[0]] = disponivel[0][numItem[0]];
+		numItem[0]++;
 	}
 	public void removeDVD(int indice) {
             dvds[indice] = null;  // Remove o DVD da coleção
@@ -43,6 +46,9 @@ public class Multimidia {
 	public void adicionaLivro(String nome, String autor, String editora, String genero, int ano, String edicao) {
 		Livro livro = new Livro(nome, autor, editora, genero, ano, edicao);
 		livros[numItem[1]] = livro;
+		this.unidades[1][numItem[1]] = unidades[1][numItem[1]];  
+        this.disponivel[1][numItem[1]] = disponivel[1][numItem[1]];
+		numItem[1]++;
 	}
 	public void removeLivro(int indice) {
             livros[indice] = null;  // Remove o DVD da coleção
@@ -53,6 +59,9 @@ public class Multimidia {
 	public void adicionaEbook(String nome, String autor, String editora, String genero, int ano, String edicao) {
 		Ebook ebook = new Ebook(nome, autor, editora, genero, ano, edicao);
 		ebooks[numItem[2]] = ebook;
+		this.unidades[2][numItem[2]] = unidades[2][numItem[2]];  
+        this.disponivel[2][numItem[2]] = disponivel[2][numItem[2]];
+		numItem[2]++;
 	}
 	public void removeEbook(int indice) {
             ebooks[indice] = null;  // Remove o DVD da coleção
@@ -63,6 +72,9 @@ public class Multimidia {
 	public void adicionaCD(String nome, String artista, String gravadora, String genero, int ano, String volume) {
 		CD cd = new CD(nome, artista, gravadora, genero, ano, volume);
 		cds[numItem[3]] = cd;
+		this.unidades[3][numItem[3]] = unidades[3][numItem[3]];  
+        this.disponivel[3][numItem[3]] = disponivel[3][numItem[3]];
+		numItem[3]++;
 	}
 	public void removeCD(int indice) {
             cds[indice] = null;  // Remove o DVD da coleção
