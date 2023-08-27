@@ -8,6 +8,7 @@ public class Livro {
 	private String genero;
 	private int ano;
 	private String edicao;
+	private String id;
 	
 	public Livro(String nome, String autor, String editora, String genero, int ano, String edicao) {
 		this.nome = nome;
@@ -16,6 +17,8 @@ public class Livro {
 		this.genero = genero;
 		this.ano = ano;
 		this.edicao = edicao;
+		GeradorID gerador = new GeradorID(); // gerar ID do emprestimo
+        this.id = gerador.gerarId();
 	}
 	
 	// Getters e Setters
@@ -54,5 +57,11 @@ public class Livro {
 	}
 	protected void setEdicao(String edicao) {
 		this.edicao = edicao;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
 	}
 }

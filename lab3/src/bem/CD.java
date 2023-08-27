@@ -7,6 +7,7 @@ public class CD {
 	private String genero;
 	private int ano;
 	private String volume;
+	private String id;
 	
 	public CD(String nome, String artista, String gravadora, String genero, int ano, String volume) {
 		this.nome = nome;
@@ -15,6 +16,8 @@ public class CD {
 		this.genero = genero;
 		this.ano = ano;
 		this.volume = volume;
+		GeradorID gerador = new GeradorID(); // gerar ID do emprestimo
+        this.id = gerador.gerarId();
 	}
 	
 	// Getters e Setters
@@ -53,6 +56,12 @@ public class CD {
 	}
 	protected void setVolume(String volume) {
 		this.volume = volume;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
 	}
 
 }

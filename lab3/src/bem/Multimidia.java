@@ -1,120 +1,112 @@
 package bem;
-import java.lang.Math;
 import bem.DVD;
 import bem.Livro;
 import bem.Ebook;
 import bem.CD;
 
 
+
 public class Multimidia {
 
 	// Atributos da classe
-	public String id; // Identificação interna do item
-	private DVD[] dvds; // Nome do item
+	private DVD[] dvds;
 	private Livro[] livros; // Editora do periodico
 	private Ebook[] ebooks; // Assunto do periodico/seção da biblioteca
 	private CD[] cds; // Autor(es) do periodico
-	private boolean disponivel[][]; // Indica se o periodico está disponível para empréstimo
-	private int unidades[][]; // Indica unidades do periodico disponiveis para emprestimo
+	private int[] numItem;
+	private boolean[][] disponivel; // Indica se o periodico está disponível para empréstimo
+	private int[][] unidades; // Indica unidades do periodico disponiveis para emprestimo
 	
 	// Construtor classe
-	public Multimidia(String item, String campo1, String campo2, String campo3, String campo4, String campo5, String campo6, int unidades, boolean disponivel) {
-		if(item.equals("DVD")) {
-			
-		}
-		if(item.equals("CD")) {
-			
-		}
-		if(item.equals("Ebook")) {
-			
-		}
-		if(item.equals("Livro")) {
-			
-		}
-		else {
-			System.out.println("Esse item não é aceito em nossa biblioteca");
-		}
-		this.nome = nome;
-		this.editora = editora;
-		this.assunto = assunto;
-		this.data = data;
-		double rand = Math.random();
-		rand = rand*10000;
-		int intid = (int)rand;
-		String id = Integer.toString(intid);
-		this.id = id;//Idealmente há de se haver um sistema de geração de ids
-		this.disponivel = disponivel;
-		this.unidades = unidades;
+	public Multimidia(int max_itens) {
+		dvds = new DVD[max_itens];
+		livros = new Livro[max_itens];
+		ebooks = new Ebook[max_itens];
+		cds = new CD[max_itens];
+		disponivel = new boolean[4][max_itens];  // 4 tipos de mídia (DVD, Livro, Ebook, CD)
+        unidades = new int[4][max_itens];
+        numItem = new int[4];
 	}
 	
 	// Metodos da classe
 	
-	public boolean retiraPeriodico(int copias) {
-		int exemplares = this.getUnidade();
-		boolean disponibilidade = this.getDisponibilidade();
-		if(disponibilidade == false) {
-			return false;
-		}
-		exemplares = exemplares - copias;
-		if(exemplares < 0) {
-			return false;
-		}
-		else {
-			this.setUnidade(exemplares);
-			if(exemplares == 0) {
-				this.setDisponibilidade(false);
-			}
-			return true;
-		}
+	public void adicionaDVD(String nome, String diretor, String estudio, String genero, int ano, String edicao) {
+		DVD dvd = new DVD(nome, diretor, estudio, genero, ano, edicao);
+		dvds[numItem[0]] = dvd;
 	}
-	public void adicionaCopia(int copias) {
-		int exemplares = this.getUnidade();
-		exemplares = exemplares + copias;
-		this.setUnidade(exemplares);
-		if(exemplares > 0) {
-			this.setDisponibilidade(true);
-		}
+	public void removeDVD(int indice) {
+            dvds[indice] = null;  // Remove o DVD da coleção
+            disponivel[0][indice] = false;  // Define a disponibilidade como falso
+            unidades[0][indice] = 0;  // Define o número de unidades como zero
+            numItem[0]--;  // Atualiza a contagem de itens
+	}
+	public void adicionaLivro(String nome, String autor, String editora, String genero, int ano, String edicao) {
+		Livro livro = new Livro(nome, autor, editora, genero, ano, edicao);
+		livros[numItem[1]] = livro;
+	}
+	public void removeLivro(int indice) {
+            livros[indice] = null;  // Remove o DVD da coleção
+            disponivel[1][indice] = false;  // Define a disponibilidade como falso
+            unidades[1][indice] = 0;  // Define o número de unidades como zero
+            numItem[1]--;  // Atualiza a contagem de itens
+	}
+	public void adicionaEbook(String nome, String autor, String editora, String genero, int ano, String edicao) {
+		Ebook ebook = new Ebook(nome, autor, editora, genero, ano, edicao);
+		ebooks[numItem[2]] = ebook;
+	}
+	public void removeEbook(int indice) {
+            ebooks[indice] = null;  // Remove o DVD da coleção
+            disponivel[2][indice] = false;  // Define a disponibilidade como falso
+            unidades[2][indice] = 0;  // Define o número de unidades como zero
+            numItem[2]--;  // Atualiza a contagem de itens
+	}
+	public void adicionaCD(String nome, String artista, String gravadora, String genero, int ano, String volume) {
+		CD cd = new CD(nome, artista, gravadora, genero, ano, volume);
+		cds[numItem[3]] = cd;
+	}
+	public void removeCD(int indice) {
+            cds[indice] = null;  // Remove o DVD da coleção
+            disponivel[3][indice] = false;  // Define a disponibilidade como falso
+            unidades[3][indice] = 0;  // Define o número de unidades como zero
+            numItem[3]--;  // Atualiza a contagem de itens
 	}
 	
 	
 	// Getters e Setters
-	public String getID() {
-		return id;
+	public DVD[] getDVDs() {
+		return dvds;
 	}
-	public void setNome(String nome) {
-		this.nome = nome;
+	public CD[] getCDs() {
+		return cds;
 	}
-	public String getNome() {
-		return nome;
+	public Ebook[] getEbooks() {
+		return ebooks;
 	}
-	public void setEditora(String editora) {
-		this.editora = editora;
+	public Livro[] getLivros() {
+		return livros;
 	}
-	public String getEditora() {
-		return editora;
+	public void setDVDs(DVD[] dvds) {
+		this.dvds = dvds;
 	}
-	public void setAssunto(String assunto) {
-		this.assunto = assunto;
+	public void setCDs(CD[] cds) {
+		this.cds = cds;;
 	}
-	public String getAssunto() {
-		return assunto;
+	public void setEbooks(Ebook[] ebooks) {
+		this.ebooks = ebooks;
 	}
-	public void setData(String data) {
-		this.data = data;
+	public void setLivros(Livro[] livros) {
+		this.livros = livros;
 	}
-	public String getData() {
-		return data;
-	}	
-	public boolean getDisponibilidade() {
+	public boolean[][] getDisponibilidade() {
 		return disponivel;
 	}
-	public void setDisponibilidade(boolean disponivel) {
+	public void setDisponibilidade(boolean[][] disponivel) {
 		this.disponivel = disponivel;
 	}
-	public int getUnidade() {
+	public int[][] getUnidade() {
 		return unidades;
 	}
-	public void setUnidade(int unidades) {
+	public void setUnidade(int[][] unidades) {
 		this.unidades = unidades;
 	}
 
