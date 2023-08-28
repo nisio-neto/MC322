@@ -21,40 +21,40 @@ public class CD {
 	}
 	
 	// Getters e Setters
-	protected void setNome(String nome) {
+	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	protected String getNome() {
+	public String getNome() {
 		return nome;
 	}
-	protected void setGravadora(String gravadora) {
+	public void setGravadora(String gravadora) {
 		this.gravadora = gravadora;
 	}
-	protected String getGravadora() {
+	public String getGravadora() {
 		return gravadora;
 	}
-	protected void setGenero(String genero) {
+	public void setGenero(String genero) {
 		this.genero = genero;
 	}
-	protected String getGenero() {
+	public String getGenero() {
 		return genero;
 	}
-	protected void setAno(int ano) {
+	public void setAno(int ano) {
 		this.ano = ano;
 	}
-	protected int getAno() {
+	public int getAno() {
 		return ano;
 	}	
-	protected String getArtista() {
+	public String getArtista() {
 		return artista;
 	}
-	protected void setArtista(String artista) {
+	public void setArtista(String artista) {
 		this.artista = artista;
 	}
-	protected String getVolume() {
+	public String getVolume() {
 		return volume;
 	}
-	protected void setVolume(String volume) {
+	public void setVolume(String volume) {
 		this.volume = volume;
 	}
 	public String getId() {
