@@ -24,7 +24,7 @@ public class estudante_graduacao extends membro {
 	public void retiraMulta() {
 		this.setMulta(false);
 		this.setDiasMulta(0);
-	}
+	}	
 	public void recadastraGrad(String Nome, String Telefone, String CPF, String CEP, String email, String RA, String curso, boolean Multa, int DiasMulta) {
 		this.setNome(Nome);
 		this.setTelefone(Telefone);
@@ -36,6 +36,10 @@ public class estudante_graduacao extends membro {
 		this.setDiasMulta(DiasMulta);
 		this.setMulta(Multa);
 	}
+	public double calcularTotalMultas() {
+		double valorMultaPorDia = 5.0; // Valor da multa por dia de atraso
+		return getDiasMulta() * valorMultaPorDia;
+	    }
 	
 	// Getters e Setters
 	public void setMulta(boolean Multa) {
@@ -62,5 +66,5 @@ public class estudante_graduacao extends membro {
 	public String getCurso() {
 		return curso;
 	}
-
+	
 }
