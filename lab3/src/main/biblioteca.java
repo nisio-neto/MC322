@@ -21,7 +21,10 @@ public class biblioteca {
 		itens.adicionaLivro("The Java Programming Language","Ensino","Ken Arnold, James Gosling & David Holmes","Prentice Hall",2000,"2 edição");
 		Emprestimo pedido01 = new Emprestimo(Nisio.getNome(),itens.getLivros()[0].getNome());
 		System.out.println("Empréstimo realizado para " + Nisio.getNome() + " do livro " + itens.getLivros()[0].getNome());
-        
+		Renovação renovaçãoExemplo = new Renovação("The Java Programming Language", "Nisio José");
+        Reserva reservaExemplo = new Reserva("Ensino", "Ricardo Horie");
+        Relatorio.gerarRelatorioEstatisticas(listaDeEmprestimos, listaDeReservas); 
+        Relatorio.gerarRelatorioFinanceiro(listaDeEstudantesEProfessores);
         // Simulando a devolução do livro
         pedido01.setDevolvido(true);
         
