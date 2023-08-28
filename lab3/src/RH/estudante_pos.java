@@ -36,6 +36,10 @@ public class estudante_pos extends membro {
 		this.setDiasMulta(DiasMulta);
 		this.setMulta(Multa);
 	}
+	public double calcularTotalMultas() {
+		double valorMultaPorDia = 7.0; // Valor da multa por dia de atraso
+		return getDiasMulta() * valorMultaPorDia;
+	    }
 	
 	// Getters e Setters
 	public void setMulta(boolean Multa) {
