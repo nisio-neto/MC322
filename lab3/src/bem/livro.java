@@ -25,7 +25,7 @@ public class Livro {
 	protected void setNome(String nome) {
 		this.nome = nome;
 	}
-	protected String getNome() {
+	public String getNome() {
 		return nome;
 	}
 	protected void setEditora(String editora) {
