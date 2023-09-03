@@ -5,81 +5,170 @@ import bem.GeradorID;
 import java.time.LocalDate;
 
 
+
 public class Emprestimo {
     // Atributos da Classe
 	private String id; // Id interna do emprestimo
-    private String livro; // Nome/id do livro
-    private String usuario; // Nome/id do usuario
+	private String membroId; // Identificação do membro
+	private String itemId; // Identificação do item
     private Data dataEmprestimo;  // Data de emprestimo
     private Data dataVencimento; // Data de vencimento da locação
+    private Data dataDevolucao; // Data de devolução
     private boolean devolvido; // Indica se o livro foi novamente devolvido, e o emprestimo encerrado
+    private double valorMultaPorDia; // Valor da multa por dia 
 
     // Construtor da Classe
-    public Emprestimo(String livro, String usuario) {
-        this.livro = livro; 
-        this.usuario = usuario;
+    public Emprestimo(String membroId, String itemId, double valorMultaPorDia) {
+        this.membroId = membroId; 
+        this.itemId = itemId;
         this.dataEmprestimo = new Data();
-        int diasDeVencimento = 14; // Por exemplo, 14 dias de vencimento
-        Data dataAtual = new Data();
-        dataAtual.adicionarDias(diasDeVencimento); // Adicione os dias de vencimento
-        this.dataVencimento = dataAtual;
+        this.dataVencimento = calcularDataVencimento(membroId);
+        this.devolvido = false;
+        this.valorMultaPorDia = valorMultaPorDia;
         GeradorID gerador = new GeradorID(); // gerar ID do emprestimo
         this.id = gerador.gerarId();
         System.out.println(id);
-        this.devolvido = false;
-       
-            
+                   
     }
 
-       // Getter para ID
+    public enum PerfilMembro {
+        ESTUDANTE_GRADUACAO,
+        ESTUDANTE_POS_GRADUACAO,
+        PROFESSOR,
+        FUNCIONARIO
+    }
+    
+    public class RegrasEmprestimo {
+        public static int getPrazoEmprestimo(PerfilMembro perfilMembro) {
+            switch (perfilMembro) {
+                case ESTUDANTE_GRADUACAO:
+                    return 15;
+                case ESTUDANTE_POS_GRADUACAO:
+                    return 20;
+                case PROFESSOR:
+                    return 30;
+                case FUNCIONARIO:
+                    return 20;
+                default:
+                    return 0; // Perfil não reconhecido
+            }
+        }
+
+        public static int getLimiteEmprestimo(PerfilMembro perfilMembro) {
+            switch (perfilMembro) {
+                case ESTUDANTE_GRADUACAO:
+                    return 3;
+                case ESTUDANTE_POS_GRADUACAO:
+                    return 5;
+                case PROFESSOR:
+                    return 7;
+                case FUNCIONARIO:
+                    return 4;
+                default:
+                    return 0; // Perfil não reconhecido
+            }
+        }
+
+        public static double getMultaPorAtraso(PerfilMembro perfilMembro) {
+            switch (perfilMembro) {
+                case ESTUDANTE_GRADUACAO:
+                case ESTUDANTE_POS_GRADUACAO:
+                    return 1.0;
+                case PROFESSOR:
+                    return 0.5;
+                case FUNCIONARIO:
+                    return 0.75;
+                default:
+                    return 0.0; // Perfil não reconhecido
+            }
+        }
+    }
+
+    
+    private Data calcularDataVencimento(String membroId) {
+    	Data dataVencimento = new Data();
+    	int prazoDias = 0;
+    	 // Determinar o prazo de vencimento com base no tipo de membro
+        if (membroId.startsWith("EG")) {
+            prazoDias = 15;
+        } else if (membroId.startsWith("EP")) {
+            prazoDias = 20;
+        } else if (membroId.startsWith("P")) {
+            prazoDias = 30;
+        } else if (membroId.startsWith("F")) {
+            prazoDias = 20;
+        }
+
+        // Adicionar o prazo de dias ao data de empréstimo
+        dataVencimento.adicionarDias(prazoDias);
+
+        return dataVencimento;
+    }
+    
+    public double calcularMulta() {
+        if (dataDevolucao == null) {
+            return 0; // Ainda não foi devolvido, portanto, multa zero
+        }
+
+        int diasAtraso = dataDevolucao.diferencaEmDias(dataVencimento);
+        if (diasAtraso > 0) {
+            return diasAtraso * valorMultaPorDia;
+        } else {
+            return 0; // Sem atraso, multa zero
+        }
+    }
+    
+    // Método para realizar a devolução do item
+    public void realizarDevolucao() {
+        dataDevolucao = new Data();
+        devolvido = true;
+    }
+    
+       // Getters e Setters
     public String getId() {
-    	return id;
-    }
-    
-     // Getter para livro
-    public String getLivro() {
-    	return livro;
-    }
-    
-    // Setter para o livro
-    public void setLivro(String livro) {
-    	this.livro = livro;
-    }
-    
-    // Getter para o usuário
-    public String getUsuario() {
-    	return usuario;
-    }
-    
-    // Setter para usuário
-    public void setUsuario(String usuario) {
-    	this.usuario =usuario;
-    }
-    
-    // Getter para a data de empréstimo
-    public Data getDataEmprestimo() {
-    	return dataEmprestimo;
-    }
-    
-    //Getter para a data de vencimento
-    public Data getDataVencimento() {
-    	return dataVencimento;
-    }
-    
-    // Setter para a data de vencimento
-    public void setDataVencimento(Data datavencimento) {
-    	this.dataVencimento = datavencimento;
-    }
-    
-    // getter para a flag "devolvido"
-    public boolean getDevolvido() {
-    	return devolvido;
-    }
-   
-    // Setter para flag "devolvido"
-    public void setDevolvido(boolean devolvido) {
-    	this.devolvido = devolvido;
+        return id;
     }
 
- 
+    public String getItemId() {
+        return itemId;
+    }
+
+    public void setItemId(String itemId) {
+        this.itemId = itemId;
+    }
+
+    public String getMembroId() {
+        return membroId;
+    }
+
+    public void setMembroId(String membroId) {
+        this.membroId = membroId;
+        this.dataVencimento = calcularDataVencimento(membroId);
+    }
+
+    public Data getDataEmprestimo() {
+        return dataEmprestimo;
+    }
+
+    public Data getDataVencimento() {
+        return dataVencimento;
+    }
+
+    public Data getDataDevolucao() {
+        return dataDevolucao;
+    }
+
+    public void setDataDevolucao(Data dataDevolucao) {
+        this.dataDevolucao = dataDevolucao;
+    }
+
+    public boolean isDevolvido() {
+        return devolvido;
+    }
+
+    public void setDevolvido(boolean devolvido) {
+        this.devolvido = devolvido;
+    }
 }
+ 
+
