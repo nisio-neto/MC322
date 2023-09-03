@@ -1,6 +1,6 @@
 package bem;
 
-public class Ebook {
+public class Outros {
 
     private String nome;
     private String autor;
@@ -11,13 +11,12 @@ public class Ebook {
     private String capa;
     private String sinopse;
     private String id;
+    private String local;
+    private String conservacao;
+    private String tipo;
     private String formato;
-    private String formatoArquivo;
-    private String url;
-    private String requisitos;
-    private String dataDisponibilidade;
 
-    public Ebook(String nome, String autor, String editora, String genero, int ano, String edicao, String capa, String sinopse, String formato, String formatoArquivo, String url, String requisitos, String dataDisponibilidade) {
+    public Outros(String nome, String autor, String editora, String genero, int ano, String edicao, String capa, String sinopse, String local, String conservacao, String tipo, String formato) {
         this.nome = nome;
         this.autor = autor; 
         this.editora = editora;
@@ -26,11 +25,10 @@ public class Ebook {
         this.edicao = edicao;
         this.capa = capa;
         this.sinopse = sinopse;
+        this.local = local;
+        this.conservacao = conservacao;
+        this.tipo = tipo;
         this.formato = formato;
-        this.formatoArquivo = formatoArquivo;
-        this.url = url;
-        this.requisitos = requisitos;
-        this.dataDisponibilidade = dataDisponibilidade;
         GeradorID gerador = new GeradorID(); // gerar ID do empréstimo
         this.id = gerador.gerarId();
     }
@@ -109,44 +107,36 @@ public class Ebook {
         this.id = id;
     }
 
+    public String getLocal() {
+        return local;
+    }
+
+    public void setLocal(String local) {
+        this.local = local;
+    }
+
+    public String getConservacao() {
+        return conservacao;
+    }
+
+    public void setConservacao(String conservacao) {
+        this.conservacao = conservacao;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
     public String getFormato() {
         return formato;
     }
 
     public void setFormato(String formato) {
         this.formato = formato;
-    }
-
-    public String getFormatoArquivo() {
-        return formatoArquivo;
-    }
-
-    public void setFormatoArquivo(String formatoArquivo) {
-        this.formatoArquivo = formatoArquivo;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public String getRequisitos() {
-        return requisitos;
-    }
-
-    public void setRequisitos(String requisitos) {
-        this.requisitos = requisitos;
-    }
-
-    public String getDataDisponibilidade() {
-        return dataDisponibilidade;
-    }
-
-    public void setDataDisponibilidade(String dataDisponibilidade) {
-        this.dataDisponibilidade = dataDisponibilidade;
     }
 }
 
