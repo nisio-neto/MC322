@@ -7,8 +7,8 @@ public class estudante_pos extends membro {
 	private boolean Multa; // Indica se o usuario recebeu multa
 	private int DiasMulta; // indica dias de multa do usuario
 	
-	public estudante_pos(String nome, String telefone, String CPF, String CEP, String RA, boolean Multa, int DiasMulta, String email, String especializacao) {
-		super(nome,telefone,CPF,CEP,email);
+	public estudante_pos(String nome, String telefone, String CPF, String endereço, String RA, boolean Multa, int DiasMulta, String dataInscricao, String especializacao) {
+		super(nome,telefone,CPF,endereço,dataInscricao);
 		this.RA = RA;
 		this.Multa = Multa;
 		this.DiasMulta = DiasMulta;
@@ -25,19 +25,19 @@ public class estudante_pos extends membro {
 		this.setMulta(false);
 		this.setDiasMulta(0);
 	}
-	public void recadastraPos(String Nome, String Telefone, String CPF, String CEP, String email, String RA, String especializacao, boolean Multa, int DiasMulta) {
+	public void recadastraPos(String Nome, String Telefone, String CPF, String endereço, String dataInscricao, String RA, String especializacao, boolean Multa, int DiasMulta) {
 		this.setNome(Nome);
 		this.setTelefone(Telefone);
-		this.setCEP(CEP);
+		this.setendereço(endereço);
 		this.setCPF(CPF);
-		this.setEmail(email);
+		this.setDataInscricao(dataInscricao);
 		this.setRA(RA);
 		this.setEspecializacao(especializacao);
 		this.setDiasMulta(DiasMulta);
 		this.setMulta(Multa);
 	}
 	public double calcularTotalMultas() {
-		double valorMultaPorDia = 7.0; // Valor da multa por dia de atraso
+		double valorMultaPorDia = 1.0; // Valor da multa por dia de atraso
 		return getDiasMulta() * valorMultaPorDia;
 	    }
 	
