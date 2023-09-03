@@ -7,15 +7,15 @@ public class membro {
 	private String nome; // Nome do membro
 	private String telefone; // Telefone do membro
 	private String CPF; // CPF do membro
-	private String CEP; // CEP da residencia do membro
-	private String email;
+	private String endereço; // endereço da residencia do membro
+	private String dataInscricao;
 	
-	public membro(String nome, String telefone, String CPF, String CEP, String email) {
+	public membro(String nome, String telefone, String CPF, String endereço, String dataInscricao) {
 		this.nome = nome;
 		this.telefone = telefone;
-		this.CEP = CEP;
+		this.endereço = endereço;
 		this.CPF = CPF;
-		this.email = email;
+		this.dataInscricao = dataInscricao;
 		GeradorID gerador = new GeradorID(); // gerar ID do emprestimo
         this.id = gerador.gerarId();
 	}
@@ -46,16 +46,16 @@ public class membro {
 	public String getCPF() {
 		return CPF;
 	}
-	public void setCEP(String CEP) {
-		this.CEP = CEP;
+	public void setendereço(String endereço) {
+		this.endereço = endereço;
 	}
-	public String getCEP() {
-		return CEP;
+	public String getendereço() {
+		return endereço;
 	}
-	public void setEmail(String email) {
-		this.email = email;
+	public void setDataInscricao(String dataInscricao) {
+		this.dataInscricao = dataInscricao;
 	}
-	public String getEmail() {
-		return email;
+	public String getDataInscricao() {
+		return dataInscricao;
 	}
 }
