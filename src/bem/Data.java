@@ -8,6 +8,9 @@ public class Data {
 	private int dia; // dia
 	private int mes; // mês
 	private int ano; // ano
+	private LocalDate dataInicio;
+	private LocalDate dataFim;
+	
 
 	//Construtor da Classe
 	public Data() {
@@ -15,6 +18,8 @@ public class Data {
 	this.dia = dataAtual.getDayOfMonth(); //gerar dia do mês
 	this.mes = dataAtual.getMonthValue(); // gerar mês do ano
 	this.ano = dataAtual.getYear(); // gerar ano
+	this.dataInicio = dataInicio;
+    this.dataFim = dataFim;
 	}
 
 	//Adicionar dias a uma data
@@ -45,7 +50,24 @@ public class Data {
 
         return diferenca;
     }
+    
+    // Método para verificar se esta data é posterior a outra data
+    public boolean after(Data outraData) {
+        return this.dataInicio.isAfter(outraData.getDataFim());
+    }
 
+    // Método para verificar se esta data é anterior a outra data
+    public boolean before(Data outraData) {
+        return this.dataFim.isBefore(outraData.getDataInicio());
+    }
+    
+    public LocalDate getDataInicio() {
+        return dataInicio;
+    }
+
+    public LocalDate getDataFim() {
+        return dataFim;
+    }
 
 	//getter do dia
 	public int getDia() {
