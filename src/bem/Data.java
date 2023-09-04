@@ -26,6 +26,27 @@ public class Data {
 		this.ano = dataNova.getYear();
 	}
 	
+	 // Método para calcular a diferença em dias entre duas datas
+    public int diferencaEmDias(Data outraData) {
+        int dia1 = this.getDia();
+        int mes1 = this.getMes();
+        int ano1 = this.getAno();
+
+        int dia2 = outraData.getDia();
+        int mes2 = outraData.getMes();
+        int ano2 = outraData.getAno();
+
+        // Converter as datas para um número sequencial de dias desde uma data de referência
+        int data1EmDias = ano1 * 365 + mes1 * 30 + dia1;
+        int data2EmDias = ano2 * 365 + mes2 * 30 + dia2;
+
+        // Calcular a diferença em dias
+        int diferenca = Math.abs(data2EmDias - data1EmDias);
+
+        return diferenca;
+    }
+
+
 	//getter do dia
 	public int getDia() {
 		return dia;
