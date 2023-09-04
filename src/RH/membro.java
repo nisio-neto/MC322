@@ -1,6 +1,15 @@
 package RH;
 
 import bem.GeradorID;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import bem.Emprestimo;
+import bem.Reserva;
+import bem.Data;
+import bem.Relatorio;
+import bem.Periodo;
+
 
 public class membro {
 	
@@ -11,6 +20,10 @@ public class membro {
 	private String endereço; // endereço da residencia do membro
 	private String dataInscricao;
 	private Perfil perfil;
+	private List<Emprestimo> emprestimos; // Lista de empréstimos feitos pelo membro
+	private List<Reserva> reservas; // Lista de reservas feitas pelo membro
+	private double multasAcumuladas; // Total de multas acumuladas pelo membro
+	private double pagamentosEfetuados; // Total de pagamentos efetuados pelo membro
 	
 	public membro(String nome, String telefone, String CPF, String endereço, String dataInscricao, Perfil perfil) {
 		this.nome = nome;
@@ -21,8 +34,29 @@ public class membro {
 		GeradorID gerador = new GeradorID(); // gerar ID do emprestimo
         this.id = gerador.gerarId();
         this.perfil = perfil; // Definindo o perfil durante a criação do membro
+        this.emprestimos = new ArrayList<>();
+        this.reservas = new ArrayList<>();
+        this.multasAcumuladas = 0;
+        this.pagamentosEfetuados = 0;
 	}
 
+
+	public int getEmprestimosNoPeriodo(Periodo periodo) {
+	    int contadorEmprestimos = 0;
+
+	    for (Emprestimo emprestimo : emprestimos) {
+	        Data dataEmprestimo = emprestimo.getDataEmprestimo();
+	        Data dataInicio = periodo.getDataInicio();
+	        Data dataFim = periodo.getDataFim();
+
+	        if (dataEmprestimo.after(dataInicio) && dataEmprestimo.before(dataFim)) {
+	            contadorEmprestimos++;
+	        }
+	    }
+
+	    return contadorEmprestimos;
+	}
+	
 	// Enumeração para representar os perfis de membro
 	public enum Perfil {
 	    ESTUDANTE_GRADUACAO,
