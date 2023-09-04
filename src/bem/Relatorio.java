@@ -18,6 +18,7 @@ import RH.estudante_pos;
 import RH.professor;
 import RH.membro;
 import RH.funcionarios;
+import bem.Periodo;
 
 
 public class Relatorio {
@@ -69,28 +70,7 @@ public class Relatorio {
         System.out.println("Total de Multas: R$" + totalMultas);
     }
     
-    public class Periodo {
-        private LocalDate dataInicio;
-        private LocalDate dataFim;
-
-        public Periodo(LocalDate dataInicio, LocalDate dataFim) {
-            this.dataInicio = dataInicio;
-            this.dataFim = dataFim;
-        }
-        
-        public LocalDate getDataInicio() {
-            return dataInicio;
-        }
-
-        public LocalDate getDataFim() {
-            return dataFim;
-        }
-
-        @Override
-        public String toString() {
-            return dataInicio + " a " + dataFim;
-        }
-    }
+  
     // Gera relatório de atividades de membros
     public static void gerarRelatorioAtividadesMembros(List<membro> membros, Periodo periodo) {
         System.out.println("Relatório de Atividades de Membros");
