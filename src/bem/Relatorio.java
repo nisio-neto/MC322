@@ -89,32 +89,45 @@ public class Relatorio {
         }
     }
     
-    // Gera relatório de uso de itens multimídia
-    public static void gerarRelatorioUsoItensMultimidia(List<Multimidia> itens) {
+ // Gera relatório de uso de itens multimídia
+    public static void gerarRelatorioUsoItensMultimidia(Multimidia multimidia, List<Emprestimo> emprestimos, List<Reserva> reservas) {
         System.out.println("Relatório de Uso de Itens Multimídia");
 
-        for (Multimidia item : itens) {
-            int emprestimos = item.getEmprestimo();
-            int reservas = item.getReserva();
+        // Itera sobre todos os tipos de mídia
+        for (int tipo = 0; tipo < multimidia.getNumeroTotalItens(); tipo++) {
+            // Verifica se o tipo de mídia possui itens
+            if (multimidia.getNumItens(tipo) > 0) {
+                String nomeTipo = multimidia.getNomeTipo(tipo);
 
-            System.out.println("Item: " + item.getTitulo());
-            System.out.println("Empréstimos: " + emprestimos);
-            System.out.println("Reservas: " + reservas);
-            System.out.println();
+                System.out.println("Tipo de Mídia: " + nomeTipo);
+
+                // Itera sobre os itens desse tipo de mídia
+                for (int i = 0; i < multimidia.getNumItens(tipo); i++) {
+                    String itemId = multimidia.getId(tipo, i);
+                    int emprestimosCount = Emprestimo.calcularEmprestimos(emprestimos, itemId);
+                    int reservasCount = Reserva.calcularReservas(reservas, itemId);
+
+                    System.out.println("Item: " + multimidia.getTitulo(tipo, i));
+                    System.out.println("Empréstimos: " + emprestimosCount);
+                    System.out.println("Reservas: " + reservasCount);
+                    System.out.println();
+                }
+            }
         }
     }
 
+    
     // Relatório de Multas e Pagamentos
-    public static void gerarRelatorioMultasPagamentos(List<membro> membros) {
-        System.out.println("Relatório de Multas e Pagamentos");
+    public static void gerarRelatorioMultasPagamentos(List<membro> membros, Periodo periodo) {
+        System.out.println("Relatório de Multas e Pagamentos no Período: " + periodo.toString());
         
         for (membro membro : membros) {
-            double multas = membro.calcularTotalMultas();
+            double multasNoPeriodo = membro.getMultasNoPeriodo(periodo);
             double pagamentos = membro.getTotalPagamentos();
             
-            if (multas > 0 || pagamentos > 0) {
+            if (multasNoPeriodo > 0 || pagamentos > 0) {
                 System.out.println("Membro: " + membro.getNome());
-                System.out.println("Multas acumuladas: R$" + multas);
+                System.out.println("Multas acumuladas no período: R$" + multasNoPeriodo);
                 System.out.println("Pagamentos efetuados: R$" + pagamentos);
                 System.out.println();
             }
