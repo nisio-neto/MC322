@@ -187,7 +187,13 @@ public class Relatorio {
             int totalEmprestimos = item.getTotalEmprestimos();
             int totalReservas = item.getReservas();
 
-            System.out.println("Item: " + item.getTitulo());
+            int tipo = item.getTipo().ordinal();
+            int indice = item.getIndice();
+
+            // Obtenha o título com base no tipo e no índice
+            String titulo = item.getTitulo(tipo, indice);
+
+            System.out.println("Item: " + titulo);
             System.out.println("Total de empréstimos: " + totalEmprestimos);
             System.out.println("Total de reservas: " + totalReservas);
             System.out.println();
