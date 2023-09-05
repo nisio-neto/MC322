@@ -16,6 +16,7 @@ public class Multimidia {
     private String[][] titulos;
     private String[][] ids;
     private int[][] contadorEmprestimos;
+    private int[][] contadorReservas;
 
     public Multimidia(int max_itens, int numTipos) {
         dvds = new DVD[max_itens];
@@ -32,6 +33,7 @@ public class Multimidia {
         titulos = new String[numTipos][maxItens];
         ids = new String[numTipos][maxItens];
         contadorEmprestimos = new int[numTipos][maxItens];
+        contadorReservas = new int[5][max_itens];
         
     }
 
@@ -171,6 +173,52 @@ public class Multimidia {
         return total;
     }
     
+    //quantidade disponível de cada tipo de item multimídia
+    public int getQuantidadeDisponivel(int tipo) {
+        if (tipo >= 0 && tipo < numItens.length) {
+            int totalItens = numItens[tipo];
+            int[] emprestimosPorTipo = contadorEmprestimos[tipo];
+            
+            int emprestados = 0;
+            for (int emprestimos : emprestimosPorTipo) {
+                emprestados += emprestimos;
+            }
+            
+            return totalItens - emprestados;
+        }
+        return 0; // Retorna 0 se o tipo for inválido
+    }
+
+ // Método para obter a quantidade de tipos de mídia
+    public int getQuantidadeTipos() {
+        return numItens.length;
+    }
+    
+   
+        public int getTotalEmprestimos() {
+            int totalEmprestimos = 0;
+
+            for (int tipo = 0; tipo < numItens.length; tipo++) {
+                for (int indice = 0; indice < numItens[tipo]; indice++) {
+                    totalEmprestimos += contadorEmprestimos[tipo][indice];
+                }
+            }
+
+            return totalEmprestimos;
+        }
+
+        public int getReservas() {
+            int totalReservas = 0;
+
+            for (int tipo = 0; tipo < numItens.length; tipo++) {
+                for (int indice = 0; indice < numItens[tipo]; indice++) {
+                    totalReservas += contadorReservas[tipo][indice];
+                }
+            }
+
+            return totalReservas;
+        }
+
     // Outros getters e setters
     public DVD[] getDVDs() {
         return dvds;
