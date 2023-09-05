@@ -134,20 +134,26 @@ public class Relatorio {
         }
     }
 
-    // Relatório de Disponibilidade de Itens
+ // Relatório de Disponibilidade de Itens
     public static void gerarRelatorioDisponibilidadeItens(List<Multimidia> itens) {
         System.out.println("Relatório de Disponibilidade de Itens");
-        
-        for (Multimidia item : itens) {
-            int disponiveis = item.getQuantidadeDisponivel();
-            
-            if (disponiveis > 0) {
-                System.out.println("Item: " + item.getTitulo());
-                System.out.println("Quantidade disponível: " + disponiveis);
-                System.out.println();
+
+        for (Multimidia multimidia : itens) {
+            for (int tipo = 0; tipo < multimidia.getQuantidadeTipos(); tipo++) {
+                int quantidadeDisponivel = multimidia.getQuantidadeDisponivel(tipo);
+
+                if (quantidadeDisponivel > 0) {
+                    String nomeTipo = multimidia.getNomeTipo(tipo);
+
+                    System.out.println("Tipo de Mídia: " + nomeTipo);
+                    System.out.println("Item: " + multimidia.getTitulo(tipo, 0)); // Suponha que pegamos o primeiro item
+                    System.out.println("Quantidade disponível: " + quantidadeDisponivel);
+                    System.out.println();
+                }
             }
         }
     }
+
 
     // Estatísticas de Uso por Perfil de Membro
     public static void gerarEstatisticasUsoPerfilMembro(List<membro> membros) {
@@ -165,18 +171,26 @@ public class Relatorio {
         }
     }
 
-    // Relatório de Itens Mais Populares
+ // Relatório de Itens Mais Populares
     public static void gerarRelatorioItensMaisPopulares(List<Multimidia> itens) {
         System.out.println("Relatório de Itens Mais Populares");
-        
-        itens.sort((item1, item2) -> Integer.compare(item2.getTotalEmprestimo(), item1.getTotalEmprestimo()));
+
+        // Classifique os itens com base no número total de empréstimos e reservas
+        itens.sort((item1, item2) -> {
+            int totalItem1 = item1.getTotalEmprestimos() + item1.getReservas();
+            int totalItem2 = item2.getTotalEmprestimos() + item2.getReservas();
+            return Integer.compare(totalItem2, totalItem1); // Classifique em ordem decrescente
+        });
 
         for (int i = 0; i < Math.min(10, itens.size()); i++) {
             Multimidia item = itens.get(i);
+            int totalEmprestimos = item.getTotalEmprestimos();
+            int totalReservas = item.getReservas();
+
             System.out.println("Item: " + item.getTitulo());
-            System.out.println("Total de empréstimos: " + item.getTotalEmprestimo());
+            System.out.println("Total de empréstimos: " + totalEmprestimos);
+            System.out.println("Total de reservas: " + totalReservas);
             System.out.println();
         }
     }
 }
-
