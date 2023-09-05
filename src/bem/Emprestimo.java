@@ -3,6 +3,7 @@ package bem;
 import bem.Data;
 import bem.GeradorID;
 import java.time.LocalDate;
+import java.util.List;
 
 
 
@@ -106,22 +107,47 @@ public class Emprestimo {
     }
     
     public double calcularMulta() {
-        if (dataDevolucao == null) {
-            return 0; // Ainda não foi devolvido, portanto, multa zero
+        if (dataDevolucao == null || dataVencimento == null) {
+            return 0.0; // Ainda não foi devolvido ou não há data de vencimento, multa zero
         }
 
         int diasAtraso = dataDevolucao.diferencaEmDias(dataVencimento);
-        if (diasAtraso > 0) {
-            return diasAtraso * valorMultaPorDia;
-        } else {
-            return 0; // Sem atraso, multa zero
+        
+        if (diasAtraso <= 0) {
+            return 0.0; // Sem atraso, multa zero
         }
+
+        double multaPorDia = 0.0;
+
+        // Determinar a multa por dia com base no tipo de membro
+        if (membroId.startsWith("EG") || membroId.startsWith("EP")) {
+            multaPorDia = 1.0; // Estudantes de graduação e pós-graduação
+        } else if (membroId.startsWith("P")) {
+            multaPorDia = 0.5; // Professores
+        } else if (membroId.startsWith("F")) {
+            multaPorDia = 0.75; // Funcionários
+        }
+
+        return diasAtraso * multaPorDia;
     }
     
     // Método para realizar a devolução do item
     public void realizarDevolucao() {
         dataDevolucao = new Data();
         devolvido = true;
+    }
+    
+    // Método estático para calcular o número de empréstimos de um item específico
+    public static int calcularEmprestimos(List<Emprestimo> emprestimos, String itemId) {
+        int contador = 0;
+
+        for (Emprestimo emprestimo : emprestimos) {
+            if (emprestimo.getItemId().equals(itemId)) {
+                contador++;
+            }
+        }
+
+        return contador;
     }
     
        // Getters e Setters
