@@ -11,8 +11,13 @@ public class Multimidia {
     private boolean[][] disponivel;
     private int[][] unidades;
     private int[][] total;
+    private int maxItens;
+    private int[] numItens;
+    private String[][] titulos;
+    private String[][] ids;
+    private int[][] contadorEmprestimos;
 
-    public Multimidia(int max_itens) {
+    public Multimidia(int max_itens, int numTipos) {
         dvds = new DVD[max_itens];
         livros = new Livro[max_itens];
         ebooks = new Ebook[max_itens];
@@ -22,6 +27,12 @@ public class Multimidia {
         unidades = new int[5][max_itens];
         numItem = new int[5];
         total = new int[5][max_itens];
+        this.maxItens = maxItens;
+        numItens = new int[numTipos];
+        titulos = new String[numTipos][maxItens];
+        ids = new String[numTipos][maxItens];
+        contadorEmprestimos = new int[numTipos][maxItens];
+        
     }
 
     public void adicionaDVD(String nome, String diretor, String estudio, String genero, int ano, String edicao, String capa, String sinopse, String elenco, String duracao, String idioma, String conservacao) {
@@ -107,6 +118,59 @@ public class Multimidia {
         numItem[4]--;
     }
 
+ // Método para obter o número atual de itens multimídia de um tipo específico
+    public int getNumItens(int tipo) {
+        if (tipo >= 0 && tipo < numItens.length) {
+            return numItens[tipo];
+        }
+        return 0; // Retorna 0 se o tipo for inválido
+    }
+
+    // Método para obter o nome do tipo de um item multimídia
+    public String getNomeTipo(int tipo) {
+        if (tipo >= 0 && tipo < numItens.length) {
+            switch (tipo) {
+                case 0:
+                    return "DVD";
+                case 1:
+                    return "Livro";
+                case 2:
+                    return "Ebook";
+                case 3:
+                    return "CD";
+                case 4:
+                    return "Outros";
+                default:
+                    return "Desconhecido";
+            }
+        }
+        return "Desconhecido"; // Retorna "Desconhecido" se o tipo for inválido
+    }
+
+    // Método para obter o ID de um item multimídia com base no tipo e no índice
+    public String getId(int tipo, int indice) {
+        if (tipo >= 0 && tipo < numItens.length && indice >= 0 && indice < maxItens) {
+            return ids[tipo][indice];
+        }
+        return null; // Retorna null se o tipo ou o índice forem inválidos
+    }
+
+    // Método para obter o título de um item multimídia com base no tipo e no índice
+    public String getTitulo(int tipo, int indice) {
+        if (tipo >= 0 && tipo < numItens.length && indice >= 0 && indice < maxItens) {
+            return titulos[tipo][indice];
+        }
+        return null; // Retorna null se o tipo ou o índice forem inválidos
+    }
+  
+    public int getNumeroTotalItens() {
+        int total = 0;
+        for (int tipo = 0; tipo < numItens.length; tipo++) {
+            total += getNumItens(tipo);
+        }
+        return total;
+    }
+    
     // Outros getters e setters
     public DVD[] getDVDs() {
         return dvds;
