@@ -22,8 +22,7 @@ public class membro {
 	private Perfil perfil;
 	private List<Emprestimo> emprestimos; // Lista de empréstimos feitos pelo membro
 	private List<Reserva> reservas; // Lista de reservas feitas pelo membro
-	private double multasAcumuladas; // Total de multas acumuladas pelo membro
-	private double pagamentosEfetuados; // Total de pagamentos efetuados pelo membro
+	private double totalPagamentos;
 	
 	public membro(String nome, String telefone, String CPF, String endereço, String dataInscricao, Perfil perfil) {
 		this.nome = nome;
@@ -36,8 +35,7 @@ public class membro {
         this.perfil = perfil; // Definindo o perfil durante a criação do membro
         this.emprestimos = new ArrayList<>();
         this.reservas = new ArrayList<>();
-        this.multasAcumuladas = 0;
-        this.pagamentosEfetuados = 0;
+        this.totalPagamentos = 0.0; // Inicializa o total de pagamentos como zero
 	}
 
 
@@ -57,6 +55,55 @@ public class membro {
 	    return contadorEmprestimos;
 	}
 	
+	public int getDevolucoesNoPeriodo(Periodo periodo) {
+	    int contadorDevolucoes = 0;
+
+	    for (Emprestimo emprestimo : emprestimos) {
+	        Data dataDevolucao = emprestimo.getDataDevolucao();
+
+	        if (dataDevolucao != null) { // Certifique-se de que a data de devolução não seja nula
+	            Data dataInicio = periodo.getDataInicio();
+	            Data dataFim = periodo.getDataFim();
+
+	            if (dataDevolucao.after(dataInicio) && dataDevolucao.before(dataFim)) {
+	                contadorDevolucoes++;
+	            }
+	        }
+	    }
+
+	    return contadorDevolucoes;
+	}
+	
+	public double getMultasNoPeriodo(Periodo periodo) {
+	    double totalMultas = 0.0;
+
+	    for (Emprestimo emprestimo : emprestimos) {
+	        Data dataEmprestimo = emprestimo.getDataEmprestimo();
+	        Data dataDevolucao = emprestimo.getDataDevolucao();
+
+	        if (dataEmprestimo != null && dataDevolucao != null) {
+	            Data dataInicio = periodo.getDataInicio();
+	            Data dataFim = periodo.getDataFim();
+
+	            // Verifica se a data de devolução está dentro do período e se há multa
+	            if (dataDevolucao.after(dataInicio) && dataDevolucao.before(dataFim)) {
+	                double multa = emprestimo.calcularMulta(); // método para obter o valor da multa
+	                totalMultas += multa;
+	            }
+	        }
+	    }
+
+	    return totalMultas;
+	}
+	
+	public void efetuarPagamento(double valor) {
+        totalPagamentos += valor;
+    }
+
+    public double getTotalPagamentos() {
+        return totalPagamentos;
+    }
+    
 	// Enumeração para representar os perfis de membro
 	public enum Perfil {
 	    ESTUDANTE_GRADUACAO,
