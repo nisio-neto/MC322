@@ -17,6 +17,9 @@ public class Multimidia {
     private String[][] ids;
     private int[][] contadorEmprestimos;
     private int[][] contadorReservas;
+    private int indice;
+    private TipoMultimidia tipo;
+    
 
     public Multimidia(int max_itens, int numTipos) {
         dvds = new DVD[max_itens];
@@ -120,6 +123,14 @@ public class Multimidia {
         numItem[4]--;
     }
 
+    public enum TipoMultimidia {
+        DVD,
+        Livro,
+        Ebook,
+        CD,
+        Outros
+    }
+    
  // Método para obter o número atual de itens multimídia de um tipo específico
     public int getNumItens(int tipo) {
         if (tipo >= 0 && tipo < numItens.length) {
@@ -254,5 +265,21 @@ public class Multimidia {
 
     public void setUnidades(int[][] unidades) {
         this.unidades = unidades;
+    }
+    
+    public TipoMultimidia getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(TipoMultimidia tipo) {
+        this.tipo = tipo;
+    }
+
+    public int getIndice() {
+        return indice;
+    }
+
+    public void setIndice(int indice) {
+        this.indice = indice;
     }
 }
