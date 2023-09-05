@@ -112,9 +112,27 @@ public class membro {
 	    FUNCIONARIO
 	}
 	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+	public int getTotalEmprestimos() {
+        int totalEmprestimos = 0;
 
+        for (Emprestimo emprestimo : emprestimos) {
+            totalEmprestimos++;
+        }
+
+        return totalEmprestimos;
+    }
+
+    public double calcularTotalMultas() {
+        double totalMultas = 0.0;
+
+        for (Emprestimo emprestimo : emprestimos) {
+            totalMultas += emprestimo.calcularMulta();
+        }
+
+        return totalMultas;
+    }
+	
+	public static void main(String[] args) {
 	}
 	
 	public String getID() {
