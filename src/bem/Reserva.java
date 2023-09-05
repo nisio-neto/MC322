@@ -2,6 +2,7 @@ package bem;
 
 import bem.GeradorID;
 import RH.membro;
+import java.util.List;
 
 public class Reserva {
     private String livro;
@@ -51,6 +52,19 @@ public class Reserva {
         }
     }
 
+ // Método estático para calcular o número de reservas de um item específico
+    public static int calcularReservas(List<Reserva> reservas, String itemId) {
+        int contador = 0;
+
+        for (Reserva reserva : reservas) {
+            if (reserva.getItemId().equals(itemId)) {
+                contador++;
+            }
+        }
+
+        return contador;
+    }
+    
     public String getId() {
         return id;
     }
