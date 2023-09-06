@@ -28,7 +28,6 @@ public class Emprestimo {
         this.valorMultaPorDia = valorMultaPorDia;
         GeradorID gerador = new GeradorID(); // gerar ID do emprestimo
         this.id = gerador.gerarId();
-        System.out.println(id);
                    
     }
 

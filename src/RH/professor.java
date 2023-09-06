@@ -7,8 +7,8 @@ public class professor extends membro {
 	private boolean Multa; // Indica se o usuario recebeu multa
 	private int DiasMulta; // indica dias de multa do usuario
 	
-	public professor(String nome, String telefone, String CPF, String endereço, String matricula, boolean Multa, int DiasMulta, String dataInscricao, String area) {
-		super(nome,telefone,CPF,endereço,dataInscricao);
+	public professor(String nome, String telefone, String CPF, String endereço, String matricula, boolean Multa, int DiasMulta, String dataInscricao, String area, Perfil perfil) {
+		super(nome,telefone,CPF,endereço,dataInscricao,perfil);
 		this.matricula = matricula;
 		this.Multa = Multa;
 		this.DiasMulta = DiasMulta;

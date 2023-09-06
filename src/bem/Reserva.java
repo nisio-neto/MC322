@@ -20,7 +20,6 @@ public class Reserva {
         this.disponivelParaEmprestimo = false; //  a cópia não está disponível para empréstimo
         GeradorID gerador = new GeradorID();
         this.id = gerador.gerarId();
-        System.out.println(id);
     }
 
     // Método para confirmar a reserva
@@ -57,7 +56,7 @@ public class Reserva {
         int contador = 0;
 
         for (Reserva reserva : reservas) {
-            if (reserva.getItemId().equals(itemId)) {
+            if (reserva.getId().equals(itemId)) { //não existe esse metodo if (reserva.getItemId().equals(itemId)) {
                 contador++;
             }
         }

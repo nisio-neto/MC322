@@ -8,8 +8,8 @@ public class funcionarios extends membro {
     private NivelAcesso nivelAcesso;
 
     // Construtor da Classe
-    public funcionarios(String nome, String telefone, String CPF, String endereço, String dataInscricao, String cargo, boolean Multa, int DiasMulta, NivelAcesso nivelAcesso) {
-        super(nome, telefone, CPF, endereço, dataInscricao);
+    public funcionarios(String nome, String telefone, String CPF, String endereço, String dataInscricao, String cargo, boolean Multa, int DiasMulta, NivelAcesso nivelAcesso,Perfil perfil) {
+        super(nome, telefone, CPF, endereço, dataInscricao,perfil);
         this.cargo = cargo;
         this.Multa = Multa;
         this.DiasMulta = DiasMulta;

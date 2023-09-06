@@ -21,7 +21,6 @@ public class Renovação {
         this.renovado = false;
         GeradorID gerador = new GeradorID();
         this.id = gerador.gerarId();
-        System.out.println(id);
         this.disponivelParaRenovacao = true; // Por padrão, a cópia está disponível para renovação
     }
 
