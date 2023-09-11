@@ -2,7 +2,10 @@ package bem;
 
 import java.util.ArrayList;
 import java.util.List;
-
+// Note que a classe multimidia congrega todos os tipos de midia
+// ela existia previamente a instrução do lab05. Desse modo, permaneceu
+// existindo, mas congregando adicionalmente softwares
+// para cumprir os requisitos do lab05.
 
 public class Multimidia {
 
@@ -11,6 +14,7 @@ public class Multimidia {
     private List<Ebook> ebooks;
     private List<CD> cds;
     private List<Outros> outros;
+    private List<Software> softwares;
     private int[] numItem;
     private boolean[][] disponivel;
     private int[][] unidades;
@@ -28,13 +32,14 @@ public class Multimidia {
         ebooks = new ArrayList<>();
         cds = new ArrayList<>();
         outros = new ArrayList<>();
-        disponivel = new boolean[5][max_itens];  // 5 tipos de mídia (DVD, Livro, Ebook, CD, Outros)
-        unidades = new int[5][max_itens];
-        numItem = new int[5];
-        total = new int[5][max_itens];
+        softwares = new ArrayList<>();
+        disponivel = new boolean[6][max_itens];  // 5 tipos de mídia (DVD, Livro, Ebook, CD, Outros)
+        unidades = new int[6][max_itens];
+        numItem = new int[6];
+        total = new int[6][max_itens];
         this.maxItens = max_itens;
         contadorEmprestimos = new int[numTipos][maxItens];
-        contadorReservas = new int[5][max_itens];
+        contadorReservas = new int[6][max_itens];
         
     }
 
@@ -81,6 +86,23 @@ public class Multimidia {
         disponivel[4][numItem[4]] = true;
         total[4][numItem[4]] = numItem[4] + 1;
         numItem[4]++;
+    }
+    public void adicionaSoftware(String nome, String autor, String editora, String genero, int ano, String capa, String sinopse, String versao, String licenca, String dataValidade, int unidade) {
+        Software software = new Software(nome, autor, editora, genero, ano, capa, sinopse, versao, licenca, dataValidade);
+        softwares.add(software);
+        unidades[5][numItem[5]] = unidade;
+        disponivel[5][numItem[5]] = true;
+        total[5][numItem[5]] = numItem[5] + 1;
+        numItem[5]++;
+    }
+
+    public void removeSoftware(int indice) {
+        if (indice >= 0 && indice < softwares.size()) {
+            softwares.remove(indice);
+            disponivel[5][indice] = false;
+            unidades[5][indice] = 0;
+            numItem[5]--;
+        }
     }
 
 
@@ -164,6 +186,8 @@ public class Multimidia {
                     return "CD";
                 case 4:
                     return "Outros";
+                case 5:
+                    return "Software";
                 default:
                     return "Desconhecido";
             }
@@ -265,6 +289,10 @@ public class Multimidia {
 
     public List<DVD> getDVDs() {
         return dvds;
+    }
+    
+    public List<Software> getSoftwares() {
+        return softwares;
     }
 
     public List<Livro> getLivros() {

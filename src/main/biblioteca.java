@@ -10,6 +10,12 @@ import bem.Renovação;
 import bem.Reserva;
 import RH.membro;
 import RH.funcionarios;
+import bem.Data;
+import bem.ReservaSala;
+import bem.SalaMultimidia;
+import bem.SalaGrupo;
+import bem.SalaSilenciosa;
+import bem.SalaIndividual;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,9 +27,10 @@ public class biblioteca {
         estudante_pos Ricardo = new estudante_pos("Ricardo Horie","(11)94324545","41932989780","13083-700", "123456", false,0, "15/02/2015","Mestrado em Engenharia de Controle e Automação",membro.Perfil.ESTUDANTE_POS);
         professor Cafeo = new professor("Bruno Cafeo","(19)99999999","12345678901","13083-852","678901",false, 0, "30/07/2011","Instituto de Computação",membro.Perfil.PROFESSOR);
         Multimidia itens =  new Multimidia(15,5);
-        itens.adicionaLivro("The Java Programming Language","Ken Arnold, James Gosling & David Holmes","Prentice Hall","Ensino",2000,"2 edição","bela capa","Venha aprender java amigo","89859734","E-44","Boa");
-        Emprestimo pedido01 = new Emprestimo(Nisio.getID(),itens.getLivros()[0].getId(),1);
-        System.out.println("Empréstimo realizado para " + Nisio.getNome() + " do livro " + itens.getLivros()[0].getNome());
+        itens.adicionaLivro("The Java Programming Language","Ken Arnold, James Gosling & David Holmes","Prentice Hall","Ensino",2000,"2 edição","bela capa","Venha aprender java amigo","89859734","E-44","Boa",2);
+        itens.adicionaSoftware("AutoCAD", "Autodesk", "Não consta", "Simulação Mecânica", 2022, ".", "Software de projeto mecânico e arquitetônico", "2022.2", "Estudante", "22/09/2024", 1);
+        Emprestimo pedido01 = new Emprestimo(Nisio.getID(),itens.getId(1,0),1);
+        System.out.println("Empréstimo realizado para " + Nisio.getNome() + " do livro " + itens.getTitulo(1,0));
         Renovação renovaçãoExemplo = new Renovação("The Java Programming Language", Nisio);
         Reserva reservaExemplo = new Reserva("Ensino", Ricardo);
 
@@ -41,6 +48,17 @@ public class biblioteca {
         
         Relatorio.gerarRelatorioFinanceiro(estudantesGraduacao, estudantesPos, professores);
         Relatorio.gerarRelatorioEstatisticas(emprestimos, reservas);
+
+        SalaMultimidia salaMultimidia = new SalaMultimidia(1, "Projetor, Computador, Sistema de Som", 30);
+
+        Data dataReserva = new Data();
+        dataReserva.setDia(25);
+        dataReserva.setMes(7);
+        dataReserva.setAno(2022);
+
+        ReservaSala reserva = new ReservaSala(dataReserva, "11:00", "17:00", ReservaSala.StatusReserva.CONFIRMADA, salaMultimidia.getNumero(), "Multimídia");
+
+        System.out.println("Reserva da Sala Multimídia. Data: " + reserva.getDataReserva() + " Hora " + reserva.getHoraInicio() + "-" + reserva.getHoraFim());
 
     }
 }
