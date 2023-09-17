@@ -1,5 +1,9 @@
 package bem;
 
+import java.util.ArrayList;
+import java.util.List;
+import RH.Comentario;
+
 public class Item {
     private String nome;
     private String autorArtista;
@@ -9,6 +13,7 @@ public class Item {
     private String capa;
     private String id;
     private String sinopse;
+    private List<Comentario> comentarios = new ArrayList<>(); // Lista de comentários
 
     public Item(String nome, String autorArtista, String editoraGravadora, String genero, int ano, String capa, String sinopse) {
         this.nome = nome;
@@ -22,6 +27,15 @@ public class Item {
         this.id = gerador.gerarId();
     }
 
+    public void adicionarComentario(String membroId, String texto) {
+        Comentario comentario = new Comentario(membroId, this.id, texto);
+        comentarios.add(comentario);
+    }
+
+    public List<Comentario> getComentarios() {
+        return comentarios;
+    }
+    
     // Getters e Setters para os atributos em comum
     public String getNome() {
         return nome;
