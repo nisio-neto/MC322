@@ -18,10 +18,13 @@ import bem.SalaGrupo;
 import bem.SalaSilenciosa;
 import bem.SalaIndividual;
 import bem.Livro;
+import bem.Categoria;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.Set;
+import java.util.HashSet;
 
 public class biblioteca {
     public static void main(String[] args) {
@@ -55,6 +58,13 @@ public class biblioteca {
         System.out.println("ID: " + livroconsultado.getId());
         System.out.println("Nome: " + livroconsultado.getNome());
         System.out.println("Autor: " + livroconsultado.getAutorArtista());
+        
+        //Categorias
+        Set<Categoria> categorias = new HashSet<>();
+        categorias.add(new Categoria("Ciencia","Leste"));
+        categorias.add(new Categoria("Artes","Oeste"));
+        categorias.add(new Categoria("Tecnologia","Nordeste"));
+        
         
         
         Emprestimo pedido01 = new Emprestimo(Nisio.getID(),itens.getId(1,0),1);
