@@ -29,29 +29,50 @@ import java.util.HashSet;
 public class biblioteca {
 	
 	//Set<Emprestimo> para garantir que um item não seja emprestado para dois membros ao mesmo tempo
-	private Set<Emprestimo> emprestimos = new HashSet<>();
+		private Set<Emprestimo> emprestimos = new HashSet<>() {
 
-    public boolean emprestarItem(Item item, Membro membro) {
-        // Verifique se o item já está emprestado para outro membro
-        for (Emprestimo emprestimo : emprestimos) {
-            if (emprestimo.getItem().equals(item)) {
-                return false; // O item já está emprestado
-            }
-        }
+	    public boolean emprestarItem(Item item, Membro membro) {
+	        // Verifique se o item já está emprestado para outro membro
+	        for (Emprestimo emprestimo : emprestimos) {
+	            if (emprestimo.getItem().equals(item)) {
+	                return false; // O item já está emprestado
+	            }
+	        }
 
-        // Crie um novo empréstimo e adicione-o ao conjunto
-        Emprestimo emprestimo = new Emprestimo(item, membro);
-        emprestimos.add(emprestimo);
-        return true; // Empréstimo bem-sucedido
-    }
+	        // Crie um novo empréstimo e adicione-o ao conjunto
+	        Emprestimo emprestimo = new Emprestimo(item, membro);
+	        emprestimos.add(emprestimo);
+	        return true; // Empréstimo bem-sucedido
+	    }
 
-    public void devolverItem(Item item) {
-        // Remova o empréstimo do conjunto quando o item for devolvido
-        emprestimos.removeIf(emprestimo -> emprestimo.getItem().equals(item));
-    }
+	    public void devolverItem(Item item) {
+	        // Remova o empréstimo do conjunto quando o item for devolvido
+	        emprestimos.removeIf(emprestimo -> emprestimo.getItem().equals(item));
+	    }
 
-    // Outros métodos da biblioteca...
+	    //uma List<Reserva> para armazenar as reservas, garantindo que a ordem seja mantida
+	    private List<Reserva> reservas = new ArrayList<>();
+	       
+	    public void fazerReserva(Reserva reserva) {
+	        reservas.add(reserva);
+	    }
 
+	    public void cancelarReserva(Reserva reserva) {
+	        reservas.remove(reserva);
+	    }
+
+	    public static void main(String[] args) {
+	        Biblioteca biblioteca = new Biblioteca();
+	        Item livro = new Item("Livro");
+	        Membro aluno1 = new Membro("Aluno 1");
+
+	        // Faz uma reserva
+	        Reserva reserva = new Reserva("Livro", aluno1);
+	        biblioteca.fazerReserva(reserva);
+
+	        // Cancela a reserva
+	        biblioteca.cancelarReserva(reserva);
+	    }
 	
     public static void main(String[] args) {
     	// List membros
