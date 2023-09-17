@@ -24,6 +24,7 @@ public class membro {
 	private List<Reserva> reservas; // Lista de reservas feitas pelo membro
 	private double totalPagamentos;
 	
+	
 	public membro(String nome, String telefone, String CPF, String endereço, String dataInscricao, Perfil perfil) {
 		this.nome = nome;
 		this.telefone = telefone;
@@ -36,8 +37,12 @@ public class membro {
         this.emprestimos = new ArrayList<>();
         this.reservas = new ArrayList<>();
         this.totalPagamentos = 0.0; // Inicializa o total de pagamentos como zero
+        emprestimos = new ArrayList<>(); // Inicialize a lista de empréstimos
 	}
-
+	// Método para adicionar um novo empréstimo à lista de histórico
+	public void adicionarEmprestimo(Emprestimo emprestimo) {
+        emprestimos.add(emprestimo);
+    }
 
 	public int getEmprestimosNoPeriodo(Periodo periodo) {
 	    int contadorEmprestimos = 0;

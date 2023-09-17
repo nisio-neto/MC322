@@ -27,8 +27,47 @@ import java.util.Set;
 import java.util.HashSet;
 
 public class biblioteca {
+	
+	//Set<Emprestimo> para garantir que um item não seja emprestado para dois membros ao mesmo tempo
+	private Set<Emprestimo> emprestimos = new HashSet<>();
+
+    public boolean emprestarItem(Item item, Membro membro) {
+        // Verifique se o item já está emprestado para outro membro
+        for (Emprestimo emprestimo : emprestimos) {
+            if (emprestimo.getItem().equals(item)) {
+                return false; // O item já está emprestado
+            }
+        }
+
+        // Crie um novo empréstimo e adicione-o ao conjunto
+        Emprestimo emprestimo = new Emprestimo(item, membro);
+        emprestimos.add(emprestimo);
+        return true; // Empréstimo bem-sucedido
+    }
+
+    public void devolverItem(Item item) {
+        // Remova o empréstimo do conjunto quando o item for devolvido
+        emprestimos.removeIf(emprestimo -> emprestimo.getItem().equals(item));
+    }
+
+    // Outros métodos da biblioteca...
+
+	
     public static void main(String[] args) {
     	// List membros
+    	Biblioteca biblioteca = new Biblioteca();
+        Item livro = new Item("Livro");
+        Membro aluno1 = new Membro("Aluno 1");
+        Membro aluno2 = new Membro("Aluno 2");
+
+        System.out.println("Tentando emprestar o livro para Aluno 1: " + biblioteca.emprestarItem(livro, aluno1)); // true
+        System.out.println("Tentando emprestar o livro para Aluno 2: " + biblioteca.emprestarItem(livro, aluno2)); // false (já emprestado)
+
+        biblioteca.devolverItem(livro); // Devolver o livro
+
+        System.out.println("Tentando emprestar o livro para Aluno 2 após devolução: " + biblioteca.emprestarItem(livro, aluno2)); // true (agora está disponível)
+    	
+    	
     	List<membro> membros = new ArrayList<>();
         funcionarios Bruno = new funcionarios("Bruno Oefac","(19)99999999","12345678901","13083-852","22/09/2005","Auxiliar de Biblioteca",false,0,funcionarios.NivelAcesso.ADMINISTRADOR,membro.Perfil.FUNCIONARIO, "342134");
         estudante_graduacao Nisio = new estudante_graduacao("Nisio José","(31)91234321","41932966780","13083-700", "186261", false,0, "13/02/2020","Engenharia de Controle e Automação",membro.Perfil.ESTUDANTE_GRADUACAO);
@@ -98,5 +137,8 @@ public class biblioteca {
 
         System.out.println("Reserva da Sala Multimídia. Data: " + reserva.getDataReserva() + " Hora " + reserva.getHoraInicio() + "-" + reserva.getHoraFim());
 
+        
+       
     }
-}
+
+	}
