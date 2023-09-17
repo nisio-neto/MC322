@@ -8,6 +8,7 @@ import bem.Emprestimo;
 import bem.Relatorio;
 import bem.Renovação;
 import bem.Reserva;
+import bem.Item;
 import RH.membro;
 import RH.funcionarios;
 import bem.Data;
@@ -16,19 +17,46 @@ import bem.SalaMultimidia;
 import bem.SalaGrupo;
 import bem.SalaSilenciosa;
 import bem.SalaIndividual;
-
+import bem.Livro;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 
 public class biblioteca {
     public static void main(String[] args) {
-        funcionarios Bruno = new funcionarios("Bruno Cafeo","(19)99999999","12345678901","13083-852","22/09/2005","Auxiliar de Biblioteca",false,0,funcionarios.NivelAcesso.ADMINISTRADOR,membro.Perfil.FUNCIONARIO);
+    	// List membros
+    	List<membro> membros = new ArrayList<>();
+        funcionarios Bruno = new funcionarios("Bruno Oefac","(19)99999999","12345678901","13083-852","22/09/2005","Auxiliar de Biblioteca",false,0,funcionarios.NivelAcesso.ADMINISTRADOR,membro.Perfil.FUNCIONARIO, "342134");
         estudante_graduacao Nisio = new estudante_graduacao("Nisio José","(31)91234321","41932966780","13083-700", "186261", false,0, "13/02/2020","Engenharia de Controle e Automação",membro.Perfil.ESTUDANTE_GRADUACAO);
         estudante_pos Ricardo = new estudante_pos("Ricardo Horie","(11)94324545","41932989780","13083-700", "123456", false,0, "15/02/2015","Mestrado em Engenharia de Controle e Automação",membro.Perfil.ESTUDANTE_POS);
         professor Cafeo = new professor("Bruno Cafeo","(19)99999999","12345678901","13083-852","678901",false, 0, "30/07/2011","Instituto de Computação",membro.Perfil.PROFESSOR);
-        Multimidia itens =  new Multimidia(15,5);
+        membros.add(Bruno);membros.add(Nisio);membros.add(Ricardo);membros.add(Cafeo);
+        for (membro Membro : membros) {
+            System.out.println("Nome do membro: " + Membro.getNome());
+        }
+        membros.remove(Cafeo);
+        for (membro Membro : membros) {
+            System.out.println("Nome do membro: " + Membro.getNome());
+        }
+        membros.get(0).getID();
+        
+        // Note que atualmente a classe multimidia implementa suficientemente a classe map
+        // Desse modo, optamos por manter essa classe, visto que descaracteriza-la seria 
+        // mais trabalhoso e improdutivo a manutenção do código, visto que a mesma existe 
+        // implementada desde laboratorios pregressos
+        
+        Multimidia itens =  new Multimidia(15,6);// inicializa os itens. há 6 tipos de itens e 15 é o limite de itens por tipo.
         itens.adicionaLivro("The Java Programming Language","Ken Arnold, James Gosling & David Holmes","Prentice Hall","Ensino",2000,"2 edição","bela capa","Venha aprender java amigo","89859734","E-44","Boa",2);
-        itens.adicionaSoftware("AutoCAD", "Autodesk", "Não consta", "Simulação Mecânica", 2022, ".", "Software de projeto mecânico e arquitetônico", "2022.2", "Estudante", "22/09/2024", 1);
+        itens.adicionaSoftware("AutoCAD", "Autodesk", "Não consta", "Simulação Mecânica", 2022, ".", "Software de projeto mecânico e arquitetônico", "2022.2", "Estudante", "22/09/2024", 1, "812981074");
+        String isbn = "89859734";
+        Livro livroconsultado = (Livro) itens.get(isbn);
+        System.out.println("Informações do Livro:");
+        System.out.println("ID: " + livroconsultado.getId());
+        System.out.println("Nome: " + livroconsultado.getNome());
+        System.out.println("Autor: " + livroconsultado.getAutorArtista());
+        
+        
         Emprestimo pedido01 = new Emprestimo(Nisio.getID(),itens.getId(1,0),1);
         System.out.println("Empréstimo realizado para " + Nisio.getNome() + " do livro " + itens.getTitulo(1,0));
         Renovação renovaçãoExemplo = new Renovação("The Java Programming Language", Nisio);

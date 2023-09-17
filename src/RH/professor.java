@@ -13,6 +13,7 @@ public class professor extends membro {
 		this.Multa = Multa;
 		this.DiasMulta = DiasMulta;
 		this.area = area;
+		this.setId(matricula);
 	}
 	
 	// Metodos da classe

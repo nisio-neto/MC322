@@ -8,12 +8,13 @@ public class funcionarios extends membro {
     private NivelAcesso nivelAcesso;
 
     // Construtor da Classe
-    public funcionarios(String nome, String telefone, String CPF, String endereço, String dataInscricao, String cargo, boolean Multa, int DiasMulta, NivelAcesso nivelAcesso,Perfil perfil) {
+    public funcionarios(String nome, String telefone, String CPF, String endereço, String dataInscricao, String cargo, boolean Multa, int DiasMulta, NivelAcesso nivelAcesso,Perfil perfil, String id) {
         super(nome, telefone, CPF, endereço, dataInscricao,perfil);
         this.cargo = cargo;
         this.Multa = Multa;
         this.DiasMulta = DiasMulta;
         this.nivelAcesso = nivelAcesso;
+        this.setId(id);
     }
 
     // Métodos da classe

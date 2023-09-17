@@ -6,11 +6,12 @@ public class CD extends Item {
     private String duracao;
     private String conservacao;
 
-    public CD(String nome, String artista, String gravadora, String genero, int ano, String sinopse, String capa, String faixas, String duracao, String conservacao) {
+    public CD(String nome, String artista, String gravadora, String genero, int ano, String sinopse, String capa, String faixas, String duracao, String conservacao, String id) {
         super(nome, artista, gravadora, genero, ano, capa, sinopse);
         this.faixas = faixas;
         this.duracao = duracao;
         this.conservacao = conservacao;
+        this.setId(id);
     }
 
     // Getters e Setters para os atributos específicos de CD

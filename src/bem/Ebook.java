@@ -17,6 +17,7 @@ public class Ebook extends Item {
         this.url = url;
         this.requisitos = requisitos;
         this.dataDisponibilidade = dataDisponibilidade;
+        this.setId(url);
     }
 
     // Getters e Setters para os atributos específicos de Ebook

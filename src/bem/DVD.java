@@ -8,13 +8,14 @@ public class DVD extends Item {
     private String idioma;
     private String conservacao;
 
-    public DVD(String nome, String diretor, String estudio, String genero, int ano, String edicao, String capa, String sinopse, String elenco, String duracao, String idioma, String conservacao) {
+    public DVD(String nome, String diretor, String estudio, String genero, int ano, String edicao, String capa, String sinopse, String elenco, String duracao, String idioma, String conservacao, String id) {
         super(nome, diretor, estudio, genero, ano, capa, sinopse);
         this.edicao = edicao;
         this.elenco = elenco;
         this.duracao = duracao;
         this.idioma = idioma;
         this.conservacao = conservacao;
+        this.setId(id);
     }
 
     // Getters e Setters para os atributos específicos de DVD

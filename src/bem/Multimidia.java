@@ -43,8 +43,8 @@ public class Multimidia {
         
     }
 
-    public void adicionaDVD(String nome, String diretor, String estudio, String genero, int ano, String edicao, String capa, String sinopse, String elenco, String duracao, String idioma, String conservacao, int unidade) {
-        DVD dvd = new DVD(nome, diretor, estudio, genero, ano, edicao, capa, sinopse, elenco, duracao, idioma, conservacao);
+    public void adicionaDVD(String nome, String diretor, String estudio, String genero, int ano, String edicao, String capa, String sinopse, String elenco, String duracao, String idioma, String conservacao, int unidade, String id) {
+        DVD dvd = new DVD(nome, diretor, estudio, genero, ano, edicao, capa, sinopse, elenco, duracao, idioma, conservacao, id);
         dvds.add(dvd);
         unidades[0][numItem[0]] = unidade;
         disponivel[0][numItem[0]] = true;
@@ -61,8 +61,8 @@ public class Multimidia {
         numItem[2]++;
     }
 
-    public void adicionaCD(String nome, String artista, String gravadora, String genero, int ano, String sinopse, String capa, String faixas, String duracao, String conservacao, int unidade) {
-        CD cd = new CD(nome, artista, gravadora, genero, ano, sinopse, capa, faixas, duracao, conservacao);
+    public void adicionaCD(String nome, String artista, String gravadora, String genero, int ano, String sinopse, String capa, String faixas, String duracao, String conservacao, int unidade, String id) {
+        CD cd = new CD(nome, artista, gravadora, genero, ano, sinopse, capa, faixas, duracao, conservacao, id);
         cds.add(cd);
         unidades[3][numItem[3]] = unidade;
         disponivel[3][numItem[3]] = true;
@@ -79,16 +79,16 @@ public class Multimidia {
         numItem[1]++;
     }
 
-    public void adicionaOutros(String nome, String autor, String editora, String genero, int ano, String edicao, String capa, String sinopse, String local, String conservacao, String tipo, String formato, int unidade) {
-        Outros outro = new Outros(nome, autor, editora, genero, ano, edicao, capa, sinopse, local, conservacao, tipo, formato);
+    public void adicionaOutros(String nome, String autor, String editora, String genero, int ano, String edicao, String capa, String sinopse, String local, String conservacao, String tipo, String formato, int unidade, String id) {
+        Outros outro = new Outros(nome, autor, editora, genero, ano, edicao, capa, sinopse, local, conservacao, tipo, formato, id);
         outros.add(outro);
         unidades[4][numItem[4]] = unidade;
         disponivel[4][numItem[4]] = true;
         total[4][numItem[4]] = numItem[4] + 1;
         numItem[4]++;
     }
-    public void adicionaSoftware(String nome, String autor, String editora, String genero, int ano, String capa, String sinopse, String versao, String licenca, String dataValidade, int unidade) {
-        Software software = new Software(nome, autor, editora, genero, ano, capa, sinopse, versao, licenca, dataValidade);
+    public void adicionaSoftware(String nome, String autor, String editora, String genero, int ano, String capa, String sinopse, String versao, String licenca, String dataValidade, int unidade, String id) {
+        Software software = new Software(nome, autor, editora, genero, ano, capa, sinopse, versao, licenca, dataValidade, id);
         softwares.add(software);
         unidades[5][numItem[5]] = unidade;
         disponivel[5][numItem[5]] = true;
@@ -153,6 +153,45 @@ public class Multimidia {
         }
     }
     
+    public Object get(String id) {
+        for (DVD dvd : dvds) {
+            if (dvd.getId().equals(id)) {
+                return dvd;
+            }
+        }
+
+        for (Livro livro : livros) {
+            if (livro.getId().equals(id)) {
+                return livro;
+            }
+        }
+
+        for (Ebook ebook : ebooks) {
+            if (ebook.getId().equals(id)) {
+                return ebook;
+            }
+        }
+
+        for (CD cd : cds) {
+            if (cd.getId().equals(id)) {
+                return cd;
+            }
+        }
+
+        for (Outros outro : outros) {
+            if (outro.getId().equals(id)) {
+                return outro;
+            }
+        }
+
+        for (Software software : softwares) {
+            if (software.getId().equals(id)) {
+                return software;
+            }
+        }
+
+        return null; 
+    }
     
 
     public enum TipoMultimidia {

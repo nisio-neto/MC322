@@ -138,6 +138,9 @@ public class membro {
 	public String getID() {
 		return id;
 	}
+	public void setId(String id) {
+        this.id = id;
+    }
 	public void setNome(String nome) {
 		this.nome = nome;
 	}

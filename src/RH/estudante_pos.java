@@ -13,6 +13,7 @@ public class estudante_pos extends membro {
 		this.Multa = Multa;
 		this.DiasMulta = DiasMulta;
 		this.especializacao = especializacao;
+		this.setId(RA);
 	}
 	
 	// Metodos da classe

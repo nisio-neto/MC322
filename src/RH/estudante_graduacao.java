@@ -13,6 +13,7 @@ public class estudante_graduacao extends membro {
 		this.Multa = Multa;
 		this.DiasMulta = DiasMulta;
 		this.curso = curso;
+		this.setId(RA);
 		}
 	
 	// Metodos da classe

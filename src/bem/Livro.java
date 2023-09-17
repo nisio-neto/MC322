@@ -13,6 +13,7 @@ public class Livro extends Item {
         this.ISBN = ISBN;
         this.local = local;
         this.conservacao = conservacao;
+        this.setId(ISBN);
     }
 
     // Getters e Setters para os atributos específicos de Livro
