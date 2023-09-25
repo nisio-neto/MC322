@@ -29,7 +29,7 @@ import java.util.HashSet;
 public class biblioteca {
 	
 	//Set<Emprestimo> para garantir que um item não seja emprestado para dois membros ao mesmo tempo
-		private Set<Emprestimo> emprestimos = new HashSet<>() {
+		private Set<Emprestimo> emprestimos = new HashSet<>();
 
 	    public boolean emprestarItem(Item item, Membro membro) {
 	        // Verifique se o item já está emprestado para outro membro
@@ -162,4 +162,5 @@ public class biblioteca {
        
     }
 
-	}
+		}
+		
