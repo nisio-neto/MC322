@@ -1,9 +1,13 @@
 package bem;
 
 import bem.Data;
+import bem.Item;
 import bem.GeradorID;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 
 
@@ -28,6 +32,8 @@ public class Emprestimo {
         this.valorMultaPorDia = valorMultaPorDia;
         GeradorID gerador = new GeradorID(); // gerar ID do emprestimo
         this.id = gerador.gerarId();
+        List<Emprestimo> emprestimos = new ArrayList<>();
+        Emprestimo novoEmprestimo = new Emprestimo("ID_DO_MEMBRO", "ID_DO_ITEM", valorMultaPorDia);
                    
     }
 
@@ -84,7 +90,7 @@ public class Emprestimo {
         }
     }
 
-    
+    // Calculo da data de venceimento
     private Data calcularDataVencimento(String membroId) {
     	Data dataVencimento = new Data();
     	int prazoDias = 0;
@@ -105,6 +111,7 @@ public class Emprestimo {
         return dataVencimento;
     }
     
+    // Calculo da multa caso o item não seja devolvido
     public double calcularMulta() {
         if (dataDevolucao == null || dataVencimento == null) {
             return 0.0; // Ainda não foi devolvido ou não há data de vencimento, multa zero
@@ -148,6 +155,102 @@ public class Emprestimo {
 
         return contador;
     }
+  
+    public class ExcecaoLimiteEmprestimoExcedido extends Exception {
+        public ExcecaoLimiteEmprestimoExcedido(String mensagem) {
+            super(mensagem);
+        }
+    }
+
+    public class ExcecaoItemNaoDisponivel extends Exception {
+        public ExcecaoItemNaoDisponivel(String mensagem) {
+            super(mensagem);
+        }
+    }
+    
+    public class ExcecaoMultaPendente extends Exception {
+        public ExcecaoMultaPendente(String mensagem) {
+            super(mensagem);
+        }
+    }
+
+    public class Multa {
+        private double valor;
+
+        public Multa(double valor) {
+            this.valor = valor;
+        }
+
+        public double getValor() {
+            return valor;
+        }
+    }
+    
+    public void realizarEmprestimo(List<Emprestimo> emprestimos, List<Item> itens, PerfilMembro perfilMembro) throws ExcecaoLimiteEmprestimoExcedido, ExcecaoItemNaoDisponivel, ExcecaoMultaPendente {
+        int quantidadeEmprestimosAtivos = calcularQuantidadeEmprestimosAtivos(emprestimos, membroId);
+
+        // Verificar limite de empréstimos
+        if (quantidadeEmprestimosAtivos >= RegrasEmprestimo.getLimiteEmprestimo(perfilMembro)) {
+            throw new ExcecaoLimiteEmprestimoExcedido("Limite de empréstimo excedido para este membro.");
+        }
+
+        // Verificar multas pendentes
+        if (verificarMultasPendentes(membroId)) {
+            throw new ExcecaoMultaPendente("Membro possui multas pendentes e não pode fazer novos empréstimos.");
+        }
+
+        // Verificar disponibilidade do item
+        if (!verificarDisponibilidadeItem(itemId, itens)) {
+            throw new ExcecaoItemNaoDisponivel("O item solicitado não está disponível no momento.");
+        }
+
+        // Criar o empréstimo
+        Emprestimo emprestimo = new Emprestimo(membroId, itemId, valorMultaPorDia);
+
+        // Adicionar o empréstimo à lista de empréstimos
+        emprestimos.add(emprestimo);
+
+        System.out.println("Empréstimo realizado com sucesso.");
+    }
+
+    // Método para calcular a quantidade de empréstimos ativos de um membro
+    public int calcularQuantidadeEmprestimosAtivos(List<Emprestimo> emprestimos, String membroId) {
+        int quantidadeAtivos = 0;
+
+        for (Emprestimo emprestimo : emprestimos) {
+            if (emprestimo.getMembroId().equals(membroId) && !emprestimo.isDevolvido()) {
+                quantidadeAtivos++;
+            }
+        }
+
+        return quantidadeAtivos;
+    }
+
+    
+ // Método para verificar a disponibilidade de um item pelo seu ID
+    private boolean verificarDisponibilidadeItem(String itemId, List<Item> itens) {
+        for (Item item : itens) {
+            if (item.getId().equals(itemId) && !item.verificarDisponibilidade()) {
+                return false; // O item está emprestado, não está disponível
+            }
+        }
+        return true; // O item está disponível para empréstimo
+    }
+    
+    private Map<String, Multa> multasPendentes = new HashMap<>();
+
+    // Método para adicionar uma multa a um membro
+    public void adicionarMulta(String membroId, double valor) {
+        Multa multa = new Multa(valor);
+        multasPendentes.put(membroId, multa);
+    }
+
+    // Método para verificar se um membro possui multas pendentes
+    private boolean verificarMultasPendentes(String membroId) {
+        Multa multa = multasPendentes.get(membroId);
+        return multa != null && multa.getValor() > 0;
+    }
+
     
        // Getters e Setters
     public String getId() {
