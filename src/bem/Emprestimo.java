@@ -174,6 +174,18 @@ public class Emprestimo {
         }
     }
 
+    public class ExcecaoItemNaoEmprestado extends Exception {
+        public ExcecaoItemNaoEmprestado(String mensagem) {
+            super(mensagem);
+        }
+    }
+
+    public class ExcecaoItemDanificado extends Exception {
+        public ExcecaoItemDanificado(String mensagem) {
+            super(mensagem);
+        }
+    }
+    
     public class Multa {
         private double valor;
 
@@ -249,6 +261,23 @@ public class Emprestimo {
     private boolean verificarMultasPendentes(String membroId) {
         Multa multa = multasPendentes.get(membroId);
         return multa != null && multa.getValor() > 0;
+    }
+
+ // Método para realizar a devolução do item
+    public void realizarDevolucao(String membroId) throws ExcecaoItemNaoEmprestado, ExcecaoItemDanificado {
+        if (!membroId.equals(this.membroId)) {
+            throw new ExcecaoItemNaoEmprestado("O membro não pode devolver este item, pois não o emprestou.");
+        }
+
+        // verificar se o item está danificado
+        boolean itemDanificado = false; 
+
+        if (itemDanificado) {
+            throw new ExcecaoItemDanificado("O item está danificado e precisa de manutenção.");
+        }
+
+        dataDevolucao = new Data();
+        devolvido = true;
     }
 
     
