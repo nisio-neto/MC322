@@ -14,7 +14,8 @@ public class Item {
     private String id;
     private String sinopse;
     private List<Comentario> comentarios = new ArrayList<>(); // Lista de comentários
-
+    private boolean emprestado = false; // Atributo para rastrear o estado de empréstimo do item
+    
     public Item(String nome, String autorArtista, String editoraGravadora, String genero, int ano, String capa, String sinopse) {
         this.nome = nome;
         this.autorArtista = autorArtista;
@@ -34,6 +35,21 @@ public class Item {
 
     public List<Comentario> getComentarios() {
         return comentarios;
+    }
+
+    // Método para verificar a disponibilidade do item
+    public boolean verificarDisponibilidade() {
+        return !emprestado; // O item está disponível se não estiver emprestado
+    }
+    
+    // Método para marcar o item como emprestado
+    public void marcarComoEmprestado() {
+        emprestado = true;
+    }
+    
+    // Método para marcar o item como devolvido
+    public void marcarComoDevolvido() {
+        emprestado = false;
     }
     
     // Getters e Setters para os atributos em comum
