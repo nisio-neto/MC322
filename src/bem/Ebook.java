@@ -10,14 +10,13 @@ public class Ebook extends Item {
     private String dataDisponibilidade;
 
     public Ebook(String nome, String autor, String editora, String genero, int ano, String edicao, String capa, String sinopse, String formato, String formatoArquivo, String url, String requisitos, String dataDisponibilidade) {
-        super(nome, autor, editora, genero, ano, capa, sinopse);
+        super(nome, autor, editora, genero, ano, capa, sinopse, url);
         this.edicao = edicao;
         this.formato = formato;
         this.formatoArquivo = formatoArquivo;
         this.url = url;
         this.requisitos = requisitos;
         this.dataDisponibilidade = dataDisponibilidade;
-        this.setId(url);
     }
 
     // Getters e Setters para os atributos específicos de Ebook

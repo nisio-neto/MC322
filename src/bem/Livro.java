@@ -8,12 +8,11 @@ public class Livro extends Item {
     private String conservacao;
 
     public Livro(String nome, String autor, String editora, String genero, int ano, String edicao, String capa, String sinopse, String ISBN, String local, String conservacao) {
-        super(nome, autor, editora, genero, ano, capa, sinopse);
+        super(nome, autor, editora, genero, ano, capa, sinopse, ISBN);
         this.edicao = edicao;
         this.ISBN = ISBN;
         this.local = local;
         this.conservacao = conservacao;
-        this.setId(ISBN);
     }
 
     // Getters e Setters para os atributos específicos de Livro

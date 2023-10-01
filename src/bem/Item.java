@@ -16,7 +16,7 @@ public class Item {
     private List<Comentario> comentarios = new ArrayList<>(); // Lista de comentários
     private boolean emprestado = false; // Atributo para rastrear o estado de empréstimo do item
     
-    public Item(String nome, String autorArtista, String editoraGravadora, String genero, int ano, String capa, String sinopse) {
+    public Item(String nome, String autorArtista, String editoraGravadora, String genero, int ano, String capa, String sinopse, String id) {
         this.nome = nome;
         this.autorArtista = autorArtista;
         this.editoraGravadora = editoraGravadora;
@@ -24,8 +24,7 @@ public class Item {
         this.ano = ano;
         this.capa = capa;
         this.sinopse = sinopse;
-        GeradorID gerador = new GeradorID(); // gerar ID do empréstimo
-        this.id = gerador.gerarId();
+        this.id = id;
     }
 
     public void adicionarComentario(String membroId, String texto) {

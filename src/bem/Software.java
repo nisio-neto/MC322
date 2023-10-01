@@ -7,11 +7,10 @@ public class Software extends Item {
     private String dataValidade;
 
     public Software(String nome, String autor, String editora, String genero, int ano, String capa, String sinopse, String versao, String licenca, String dataValidade, String id) {
-        super(nome, autor, editora, genero, ano, capa, sinopse);
+        super(nome, autor, editora, genero, ano, capa, sinopse, id);
         this.versao = versao;
         this.licenca = licenca;
         this.dataValidade = dataValidade;
-        this.setId(id);
     }
 
     // Getters e Setters para os atributos específicos de Software
