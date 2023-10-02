@@ -26,18 +26,26 @@ public class membro {
 	
 	
 	public membro(String nome, String telefone, String CPF, String endereço, String dataInscricao, Perfil perfil) {
-		this.nome = nome;
-		this.telefone = telefone;
-		this.endereço = endereço;
-		this.CPF = CPF;
-		this.dataInscricao = dataInscricao;
-		GeradorID gerador = new GeradorID(); // gerar ID do emprestimo
-        this.id = gerador.gerarId();
-        this.perfil = perfil; // Definindo o perfil durante a criação do membro
-        this.emprestimos = new ArrayList<>();
-        this.reservas = new ArrayList<>();
-        this.totalPagamentos = 0.0; // Inicializa o total de pagamentos como zero
-        emprestimos = new ArrayList<>(); // Inicialize a lista de empréstimos
+		try {
+	        if (nome == null || nome.isEmpty() || telefone == null || telefone.isEmpty() || CPF == null || CPF.isEmpty() || endereço == null || endereço.isEmpty() || dataInscricao == null || dataInscricao.isEmpty()) {
+	            throw new ExcecaoLoginInvalido("Dados do membro são inválidos.");
+	        }
+
+	        this.nome = nome;
+	        this.telefone = telefone;
+	        this.endereço = endereço;
+	        this.CPF = CPF;
+	        this.dataInscricao = dataInscricao;
+	        GeradorID gerador = new GeradorID(); // gerar ID do emprestimo
+	        this.id = gerador.gerarId();
+	        this.perfil = perfil; // Definindo o perfil durante a criação do membro
+	        this.emprestimos = new ArrayList<>();
+	        this.reservas = new ArrayList<>();
+	        this.totalPagamentos = 0.0; // Inicializa o total de pagamentos como zero
+	        emprestimos = new ArrayList<>(); // Inicialize a lista de empréstimos
+	    } catch (ExcecaoLoginInvalido e) {
+	        System.err.println("Erro ao criar membro: " + e.getMessage());
+	    }
 	}
 	// Método para adicionar um novo empréstimo à lista de histórico
 	public void adicionarEmprestimo(Emprestimo emprestimo) {
@@ -178,5 +186,10 @@ public class membro {
 	}
 	public Perfil getPerfil() {
         return perfil; // Método para acessar o perfil do membro
+    }
+	public class ExcecaoLoginInvalido extends Exception {
+        public ExcecaoLoginInvalido(String mensagem) {
+            super(mensagem);
+        }
     }
 }

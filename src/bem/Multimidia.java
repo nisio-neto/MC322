@@ -43,7 +43,6 @@ public class Multimidia {
         this.maxItens = max_itens;
         contadorEmprestimos = new int[numTipos][maxItens];
         contadorReservas = new int[6][max_itens];
-        int anoAtual = LocalDate.now().getYear();
         
     }
 
@@ -61,113 +60,76 @@ public class Multimidia {
     }
 
     // Métodos específicos para adicionar cada tipo de mídia
-    public void adicionaDVD(String nome, String diretor, String estudio, String genero, int ano, String edicao, String capa, String sinopse, String elenco, String duracao, String idioma, String conservacao, int unidade, String id) throws ExcecaoIdExistente, ExcecaoDadosInvalidos {
-    	if (nome == null || nome.isEmpty() || diretor == null || diretor.isEmpty() || estudio == null || estudio.isEmpty() || genero == null || genero.isEmpty() || ConfereAnoAtual(ano) || edicao == null || edicao.isEmpty() || capa == null || capa.isEmpty() || sinopse == null || sinopse.isEmpty() || elenco == null || elenco.isEmpty() || duracao == null || duracao.isEmpty() || idioma == null || idioma.isEmpty() || conservacao == null || conservacao.isEmpty() || unidade <= 0 ||  id == null || id.isEmpty()) {
-            throw new ExcecaoDadosInvalidos("Dados do DVD são inválidos.");
+    public void adicionaDVD(String nome, String diretor, String estudio, String genero, int ano, String edicao, String capa, String sinopse, String elenco, String duracao, String idioma, String conservacao, int unidade, String id) throws ExcecaoIdExistente {
+    	try {
+            if (ConfereAnoAtual(ano)) {
+                throw new ExcecaoDadosInvalidos("Ano do DVD inválido.");
+            }
+            DVD dvd = new DVD(nome, diretor, estudio, genero, ano, edicao, capa, sinopse, elenco, duracao, idioma, conservacao, id);
+            adicionarItem(dvds, dvd, 0, unidade);
+        } catch (ExcecaoDadosInvalidos e) {
+            System.err.println("Erro ao adicionar DVD: " + e.getMessage());
         }
-    	DVD dvd = new DVD(nome, diretor, estudio, genero, ano, edicao, capa, sinopse, elenco, duracao, idioma, conservacao, id);
-        adicionarItem(dvds, dvd, 0, unidade);
     }
 
-    public void adicionaCD(String nome, String artista, String gravadora, String genero, int ano, String sinopse, String capa, String faixas, String duracao, String conservacao, int unidade, String id) throws ExcecaoIdExistente, ExcecaoDadosInvalidos {
-        if (nome == null || nome.isEmpty() ||
-            artista == null || artista.isEmpty() ||
-            gravadora == null || gravadora.isEmpty() ||
-            genero == null || genero.isEmpty() ||
-            ConfereAnoAtual(ano) ||
-            sinopse == null || sinopse.isEmpty() ||
-            capa == null || capa.isEmpty() ||
-            faixas == null || faixas.isEmpty() ||
-            duracao == null || duracao.isEmpty() ||
-            conservacao == null || conservacao.isEmpty() ||
-            unidade <= 0 || id == null || id.isEmpty()) {
-            throw new ExcecaoDadosInvalidos("Dados do CD são inválidos.");
+    public void adicionaCD(String nome, String artista, String gravadora, String genero, int ano, String sinopse, String capa, String faixas, String duracao, String conservacao, int unidade, String id) throws ExcecaoIdExistente {
+        try {
+            if (ConfereAnoAtual(ano)) {
+                throw new ExcecaoDadosInvalidos("Ano do CD inválido.");
+            }
+            CD cd = new CD(nome, artista, gravadora, genero, ano, sinopse, capa, faixas, duracao, conservacao, id);
+            adicionarItem(cds, cd, 3, unidade);
+        } catch (ExcecaoDadosInvalidos e) {
+            System.err.println("Erro ao adicionar CD: " + e.getMessage());
         }
-        
-        CD cd = new CD(nome, artista, gravadora, genero, ano, sinopse, capa, faixas, duracao, conservacao, id);
-        adicionarItem(cds, cd, 3, unidade);
     }
 
-    public void adicionaEbook(String nome, String autor, String editora, String genero, int ano, String edicao, String capa, String sinopse, String formato, String formatoArquivo, String url, String requisitos, String dataDisponibilidade, int unidade) throws ExcecaoIdExistente, ExcecaoDadosInvalidos {
-        if (nome == null || nome.isEmpty() ||
-            autor == null || autor.isEmpty() ||
-            editora == null || editora.isEmpty() ||
-            genero == null || genero.isEmpty() ||
-            ConfereAnoAtual(ano) ||
-            edicao == null || edicao.isEmpty() ||
-            capa == null || capa.isEmpty() ||
-            sinopse == null || sinopse.isEmpty() ||
-            formato == null || formato.isEmpty() ||
-            formatoArquivo == null || formatoArquivo.isEmpty() ||
-            url == null || url.isEmpty() ||
-            requisitos == null || requisitos.isEmpty() ||
-            dataDisponibilidade == null || dataDisponibilidade.isEmpty() ||
-            unidade <= 0) {
-            throw new ExcecaoDadosInvalidos("Dados do Ebook são inválidos.");
+    public void adicionaEbook(String nome, String autor, String editora, String genero, int ano, String edicao, String capa, String sinopse, String formato, String formatoArquivo, String url, String requisitos, String dataDisponibilidade, int unidade) throws ExcecaoIdExistente {
+        try {
+            if (ConfereAnoAtual(ano)) {
+                throw new ExcecaoDadosInvalidos("Ano do Ebook inválido.");
+            }
+            Ebook ebook = new Ebook(nome, autor, editora, genero, ano, edicao, capa, sinopse, formato, formatoArquivo, url, requisitos, dataDisponibilidade);
+            adicionarItem(ebooks, ebook, 2, unidade);
+        } catch (ExcecaoDadosInvalidos e) {
+            System.err.println("Erro ao adicionar Ebook: " + e.getMessage());
         }
-        
-        Ebook ebook = new Ebook(nome, autor, editora, genero, ano, edicao, capa, sinopse, formato, formatoArquivo, url, requisitos, dataDisponibilidade);
-        adicionarItem(ebooks, ebook, 2, unidade);
     }
 
-    public void adicionaLivro(String nome, String autor, String editora, String genero, int ano, String edicao, String capa, String sinopse, String isbn, String local, String conservacao, int unidade) throws ExcecaoIdExistente, ExcecaoDadosInvalidos {
-        if (nome == null || nome.isEmpty() ||
-            autor == null || autor.isEmpty() ||
-            editora == null || editora.isEmpty() ||
-            genero == null || genero.isEmpty() ||
-            ConfereAnoAtual(ano) ||
-            edicao == null || edicao.isEmpty() ||
-            capa == null || capa.isEmpty() ||
-            sinopse == null || sinopse.isEmpty() ||
-            isbn == null || isbn.isEmpty() ||
-            local == null || local.isEmpty() ||
-            conservacao == null || conservacao.isEmpty() ||
-            unidade <= 0) {
-            throw new ExcecaoDadosInvalidos("Dados do Livro são inválidos.");
+    public void adicionaLivro(String nome, String autor, String editora, String genero, int ano, String edicao, String capa, String sinopse, String isbn, String local, String conservacao, int unidade) throws ExcecaoIdExistente {
+        try {
+            if (ConfereAnoAtual(ano)) {
+                throw new ExcecaoDadosInvalidos("Ano do Livro inválido.");
+            }
+            Livro livro = new Livro(nome, autor, editora, genero, ano, edicao, capa, sinopse, isbn, local, conservacao);
+            adicionarItem(livros, livro, 1, unidade);
+        } catch (ExcecaoDadosInvalidos e) {
+            System.err.println("Erro ao adicionar Livro: " + e.getMessage());
         }
-        
-        Livro livro = new Livro(nome, autor, editora, genero, ano, edicao, capa, sinopse, isbn, local, conservacao);
-        adicionarItem(livros, livro, 1, unidade);
     }
 
-    public void adicionaOutros(String nome, String autor, String editora, String genero, int ano, String edicao, String capa, String sinopse, String local, String conservacao, String tipo, String formato, int unidade, String id) throws ExcecaoIdExistente, ExcecaoDadosInvalidos {
-        if (nome == null || nome.isEmpty() ||
-            autor == null || autor.isEmpty() ||
-            editora == null || editora.isEmpty() ||
-            genero == null || genero.isEmpty() ||
-            ConfereAnoAtual(ano) ||
-            edicao == null || edicao.isEmpty() ||
-            capa == null || capa.isEmpty() ||
-            sinopse == null || sinopse.isEmpty() ||
-            local == null || local.isEmpty() ||
-            conservacao == null || conservacao.isEmpty() ||
-            tipo == null || tipo.isEmpty() ||
-            formato == null || formato.isEmpty() ||
-            unidade <= 0 || id == null || id.isEmpty()) {
-            throw new ExcecaoDadosInvalidos("Dados do Outros são inválidos.");
+    public void adicionaOutros(String nome, String autor, String editora, String genero, int ano, String edicao, String capa, String sinopse, String local, String conservacao, String tipo, String formato, int unidade, String id) throws ExcecaoIdExistente {
+        try {
+            if (ConfereAnoAtual(ano)) {
+                throw new ExcecaoDadosInvalidos("Ano da mídia inválido.");
+            }
+            Outros outro = new Outros(nome, autor, editora, genero, ano, edicao, capa, sinopse, local, conservacao, tipo, formato, id);
+            adicionarItem(outros, outro, 4, unidade);
+        } catch (ExcecaoDadosInvalidos e) {
+            System.err.println("Erro ao adicionar Outros: " + e.getMessage());
         }
-        
-        Outros outro = new Outros(nome, autor, editora, genero, ano, edicao, capa, sinopse, local, conservacao, tipo, formato, id);
-        adicionarItem(outros, outro, 4, unidade);
     }
 
-    public void adicionaSoftware(String nome, String autor, String editora, String genero, int ano, String capa, String sinopse, String versao, String licenca, String dataValidade, int unidade, String id) throws ExcecaoIdExistente, ExcecaoDadosInvalidos {
-        if (nome == null || nome.isEmpty() ||
-            autor == null || autor.isEmpty() ||
-            editora == null || editora.isEmpty() ||
-            genero == null || genero.isEmpty() ||
-            ConfereAnoAtual(ano) ||
-            capa == null || capa.isEmpty() ||
-            sinopse == null || sinopse.isEmpty() ||
-            versao == null || versao.isEmpty() ||
-            licenca == null || licenca.isEmpty() ||
-            dataValidade == null || dataValidade.isEmpty() ||
-            unidade <= 0 || id == null || id.isEmpty()) {
-            throw new ExcecaoDadosInvalidos("Dados do Software são inválidos.");
+    public void adicionaSoftware(String nome, String autor, String editora, String genero, int ano, String capa, String sinopse, String versao, String licenca, String dataValidade, int unidade, String id) throws ExcecaoIdExistente {
+        try {
+            if (ConfereAnoAtual(ano)) {
+                throw new ExcecaoDadosInvalidos("Ano do Software inválido.");
+            }
+            Software software = new Software(nome, autor, editora, genero, ano, capa, sinopse, versao, licenca, dataValidade, id);
+            adicionarItem(softwares, software, 5, unidade);
+        } catch (ExcecaoDadosInvalidos e) {
+            System.err.println("Erro ao adicionar Software: " + e.getMessage());
         }
-        
-        Software software = new Software(nome, autor, editora, genero, ano, capa, sinopse, versao, licenca, dataValidade, id);
-        adicionarItem(softwares, software, 5, unidade);
     }
 
 
@@ -480,7 +442,7 @@ public class Multimidia {
     
     public boolean ConfereAnoAtual(int ano) {
     	int anoAtual = LocalDate.now().getYear();
-    	if(anoAtual< ano ) {
+    	if(anoAtual< ano) {
     		return false;
     	}
     	else {
