@@ -80,4 +80,25 @@ public class CReflection {
             System.err.println("Erro ao imprimir métodos da classe Multimidia: " + e.getMessage());
         }
     }
+    
+    public static void imprimirLista(List<?> lista) {
+        for (Object obj : lista) {
+            System.out.println("Informações do objeto:");
+            Class<?> clazz = obj.getClass();
+            Method[] methods = clazz.getDeclaredMethods();
+
+            for (Method method : methods) {
+                if (method.getName().equals("toString")) {
+                    try {
+                        String result = (String) method.invoke(obj);
+                        System.out.println(result);
+                    } catch (Exception e) {
+                        System.out.println("Erro ao chamar o método toString(): " + e.getMessage());
+                    }
+                }
+            }
+            System.out.println("------");
+        }
+    }
+   
 }
