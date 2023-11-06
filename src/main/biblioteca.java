@@ -101,7 +101,7 @@ public class biblioteca {
         // implementada desde laboratorios pregressos
         
         Multimidia itens =  new Multimidia(15,6);// inicializa os itens. há 6 tipos de itens e 15 é o limite de itens por tipo.
-        itens.adicionaLivro("The Java Programming Language","Ken Arnold, James Gosling & David Holmes","Prentice Hall","Ensino",2000,"2 edição","bela capa","Venha aprender java amigo","89859734","E-44","Boa",2);
+        itens.adicionaLivro("The Java Programming Language","Ken Arnold, James Gosling & David Holmes","Prentice Hall","Ensino", 2000,"2 edição","bela capa","Venha aprender java amigo","89859734","E-44","Boa",2);
         itens.adicionaSoftware("AutoCAD", "Autodesk", "Não consta", "Simulação Mecânica", 2022, ".", "Software de projeto mecânico e arquitetônico", "2022.2", "Estudante", "22/09/2024", 1, "812981074");
         String isbn = "89859734";
         Livro livroconsultado = (Livro) itens.get(isbn);
@@ -148,10 +148,16 @@ public class biblioteca {
         ReservaSala reserva = new ReservaSala(dataReserva, "11:00", "17:00", ReservaSala.StatusReserva.CONFIRMADA, salaMultimidia.getNumero(), "Multimídia", salaMultimidia.getCapacidade());
 
         System.out.println("Reserva da Sala Multimídia. Data: " + reserva.getDataReserva() + " Hora " + reserva.getHoraInicio() + "-" + reserva.getHoraFim());
-
+        
+        
+        CReflection reflexao = new CReflection();
+        reflexao.ImprimeAtributoMultimidia();
+        reflexao.ImprimeMetodosMultimidia();
+        reflexao.ImprimeMetodosMembro();
+        reflexao.ImprimeAtributoMembro();
         
        
     }
 
-		}
+}
 		

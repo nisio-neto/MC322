@@ -63,7 +63,7 @@ public class Multimidia {
     public void adicionaDVD(String nome, String diretor, String estudio, String genero, int ano, String edicao, String capa, String sinopse, String elenco, String duracao, String idioma, String conservacao, int unidade, String id) throws ExcecaoIdExistente {
     	try {
             if (ConfereAnoAtual(ano)) {
-                throw new ExcecaoDadosInvalidos("Ano do DVD inválido.");
+                throw new ExcecaoDadosInvalidos("Ano do DVD inválido:" + ano);
             }
             DVD dvd = new DVD(nome, diretor, estudio, genero, ano, edicao, capa, sinopse, elenco, duracao, idioma, conservacao, id);
             adicionarItem(dvds, dvd, 0, unidade);
@@ -75,7 +75,7 @@ public class Multimidia {
     public void adicionaCD(String nome, String artista, String gravadora, String genero, int ano, String sinopse, String capa, String faixas, String duracao, String conservacao, int unidade, String id) throws ExcecaoIdExistente {
         try {
             if (ConfereAnoAtual(ano)) {
-                throw new ExcecaoDadosInvalidos("Ano do CD inválido.");
+                throw new ExcecaoDadosInvalidos("Ano do CD inválido:" + ano);
             }
             CD cd = new CD(nome, artista, gravadora, genero, ano, sinopse, capa, faixas, duracao, conservacao, id);
             adicionarItem(cds, cd, 3, unidade);
@@ -87,7 +87,7 @@ public class Multimidia {
     public void adicionaEbook(String nome, String autor, String editora, String genero, int ano, String edicao, String capa, String sinopse, String formato, String formatoArquivo, String url, String requisitos, String dataDisponibilidade, int unidade) throws ExcecaoIdExistente {
         try {
             if (ConfereAnoAtual(ano)) {
-                throw new ExcecaoDadosInvalidos("Ano do Ebook inválido.");
+                throw new ExcecaoDadosInvalidos("Ano do Ebook inválido:" + ano);
             }
             Ebook ebook = new Ebook(nome, autor, editora, genero, ano, edicao, capa, sinopse, formato, formatoArquivo, url, requisitos, dataDisponibilidade);
             adicionarItem(ebooks, ebook, 2, unidade);
@@ -98,8 +98,8 @@ public class Multimidia {
 
     public void adicionaLivro(String nome, String autor, String editora, String genero, int ano, String edicao, String capa, String sinopse, String isbn, String local, String conservacao, int unidade) throws ExcecaoIdExistente {
         try {
-            if (ConfereAnoAtual(ano)) {
-                throw new ExcecaoDadosInvalidos("Ano do Livro inválido.");
+            if (ConfereAnoAtual(ano)== true) {
+                throw new ExcecaoDadosInvalidos("Ano do Livro inválido:" + ano);
             }
             Livro livro = new Livro(nome, autor, editora, genero, ano, edicao, capa, sinopse, isbn, local, conservacao);
             adicionarItem(livros, livro, 1, unidade);
@@ -111,7 +111,7 @@ public class Multimidia {
     public void adicionaOutros(String nome, String autor, String editora, String genero, int ano, String edicao, String capa, String sinopse, String local, String conservacao, String tipo, String formato, int unidade, String id) throws ExcecaoIdExistente {
         try {
             if (ConfereAnoAtual(ano)) {
-                throw new ExcecaoDadosInvalidos("Ano da mídia inválido.");
+                throw new ExcecaoDadosInvalidos("Ano da mídia inválido:" + ano);
             }
             Outros outro = new Outros(nome, autor, editora, genero, ano, edicao, capa, sinopse, local, conservacao, tipo, formato, id);
             adicionarItem(outros, outro, 4, unidade);
@@ -123,7 +123,7 @@ public class Multimidia {
     public void adicionaSoftware(String nome, String autor, String editora, String genero, int ano, String capa, String sinopse, String versao, String licenca, String dataValidade, int unidade, String id) throws ExcecaoIdExistente {
         try {
             if (ConfereAnoAtual(ano)) {
-                throw new ExcecaoDadosInvalidos("Ano do Software inválido.");
+                throw new ExcecaoDadosInvalidos("Ano do Software inválido:" + ano);
             }
             Software software = new Software(nome, autor, editora, genero, ano, capa, sinopse, versao, licenca, dataValidade, id);
             adicionarItem(softwares, software, 5, unidade);
@@ -442,7 +442,7 @@ public class Multimidia {
     
     public boolean ConfereAnoAtual(int ano) {
     	int anoAtual = LocalDate.now().getYear();
-    	if(anoAtual< ano) {
+    	if(anoAtual> ano) {
     		return false;
     	}
     	else {
