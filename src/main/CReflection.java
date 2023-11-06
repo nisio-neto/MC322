@@ -2,6 +2,8 @@ package main;
 import java.lang.reflect.*;
 import RH.membro;
 import bem.Multimidia;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CReflection {
 
@@ -81,7 +83,7 @@ public class CReflection {
         }
     }
     
-    public static void imprimirLista(List<?> lista) {
+    public void imprimirLista(List<?> lista) {
         for (Object obj : lista) {
             System.out.println("Informações do objeto:");
             Class<?> clazz = obj.getClass();

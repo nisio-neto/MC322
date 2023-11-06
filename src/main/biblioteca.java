@@ -155,6 +155,7 @@ public class biblioteca {
         reflexao.ImprimeMetodosMultimidia();
         reflexao.ImprimeMetodosMembro();
         reflexao.ImprimeAtributoMembro();
+        reflexao.imprimirLista(estudantesGraduacao);
         
        
     }
