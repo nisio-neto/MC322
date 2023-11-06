@@ -33,7 +33,6 @@ public class Emprestimo {
         GeradorID gerador = new GeradorID(); // gerar ID do emprestimo
         this.id = gerador.gerarId();
         List<Emprestimo> emprestimos = new ArrayList<>();
-        Emprestimo novoEmprestimo = new Emprestimo("ID_DO_MEMBRO", "ID_DO_ITEM", valorMultaPorDia);
                    
     }
 
