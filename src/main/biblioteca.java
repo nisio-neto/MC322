@@ -150,22 +150,12 @@ public class biblioteca {
         System.out.println("Reserva da Sala Multimídia. Data: " + reserva.getDataReserva() + " Hora " + reserva.getHoraInicio() + "-" + reserva.getHoraFim());
         
         
-    
-        public static void main(String[] args) {
-            // Criando instâncias de membros e multimídia
-            membro membroObjeto = new membro();
-            estudante estudanteObjeto = new estudante();
-            // Criando lista de estudantes de graduacao
-            List<Object> estudantesGraduacao = new ArrayList<>();
-            estudantesGraduacao.add(membroObjeto);
-            estudantesGraduacao.add(estudanteObjeto);
-        
-            CReflection reflexao = new CReflection();
-            reflexao.ImprimeAtributoMultimidia();
-            reflexao.ImprimeMetodosMultimidia();
-            reflexao.ImprimeMetodosMembro();
-            reflexao.ImprimeAtributoMembro();
-            reflexao.imprimirLista(estudantesGraduacao);
+        CReflection reflexao = new CReflection();
+        reflexao.ImprimeAtributoMultimidia();
+        reflexao.ImprimeMetodosMultimidia();
+        reflexao.ImprimeMetodosMembro();
+        reflexao.ImprimeAtributoMembro();
+        reflexao.imprimirLista(estudantesGraduacao);
         
        
     }
