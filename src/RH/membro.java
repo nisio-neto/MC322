@@ -1,6 +1,7 @@
 package RH;
 
 import bem.GeradorID;
+import main.Subject;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,7 @@ public class membro {
 	private List<Emprestimo> emprestimos; // Lista de empréstimos feitos pelo membro
 	private List<Reserva> reservas; // Lista de reservas feitas pelo membro
 	private double totalPagamentos;
+	private Subject bibliotecaSubject;
 	
 	
 	public membro(String nome, String telefone, String CPF, String endereço, String dataInscricao, Perfil perfil) {
@@ -43,6 +45,7 @@ public class membro {
 	        this.reservas = new ArrayList<>();
 	        this.totalPagamentos = 0.0; // Inicializa o total de pagamentos como zero
 	        emprestimos = new ArrayList<>(); // Inicialize a lista de empréstimos
+	        this.bibliotecaSubject = new Subject();
 	    } catch (ExcecaoLoginInvalido e) {
 	        System.err.println("Erro ao criar membro: " + e.getMessage());
 	    }
@@ -50,6 +53,7 @@ public class membro {
 	// Método para adicionar um novo empréstimo à lista de histórico
 	public void adicionarEmprestimo(Emprestimo emprestimo) {
         emprestimos.add(emprestimo);
+        bibliotecaSubject.setMensagemNotificacao("Novo item multimídia disponível para empréstimo!");
     }
 
 	public int getEmprestimosNoPeriodo(Periodo periodo) {
