@@ -24,3 +24,36 @@ Você foi encarregado de projetar um sistema de gerenciamento para uma bibliotec
 ### Lab 03
 
 Available in "resources" folder.
+
+# Sistema de Gerenciamento de Biblioteca Universitária Multimídia
+
+Este sistema segue os princípios SOLID para garantir uma arquitetura robusta e extensível. 
+
+## Princípios SOLID Aplicados:
+
+### 1. Princípio da Responsabilidade Única (SRP)
+- **O Que:** Divisão de responsabilidades em classes e métodos.
+- **Por Quê:** Facilita a manutenção e reduz o impacto de mudanças.
+- **Como:** O serviço de reserva é agora responsável apenas pela lógica de reserva.
+
+### 2. Princípio Aberto/Fechado (OCP)
+- **O Que:** Métodos de adição de itens multimídia abertos para extensão.
+- **Por Quê:** Facilita a adição de novos tipos de itens sem modificar o código existente.
+- **Como:** Utilização de classes e métodos abstratos.
+
+### 3. Princípio da Substituição de Liskov (LSP)
+- **O Que:** Substituição de subclasses sem impacto na correção.
+- **Por Quê:** Garante consistência e extensibilidade.
+- **Como:** Certificação de que subclasses podem ser usadas em vez de suas classes base.
+
+### 4. Princípio da Segregação de Interfaces (ISP)
+- **O Que:** Interfaces específicas para cada classe de empréstimo.
+- **Por Quê:** Evita que classes implementem métodos desnecessários.
+- **Como:** Divisão de interfaces em interfaces menores e mais específicas.
+
+### 5. Princípio da Inversão de Dependência (DIP)
+- **O Que:** Injeção de dependência para classes dependentes.
+- **Por Quê:** Facilita a troca de implementações sem afetar outras partes do sistema.
+- **Como:** Dependência de abstrações em vez de implementações concretas.
+
+Este sistema é projetado para ser flexível, de fácil manutenção e extensível de acordo com as mudanças futuras.
